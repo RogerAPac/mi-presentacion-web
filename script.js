@@ -1,4 +1,4 @@
-// 1. Función de la Hamburguesa
+// 1. Funcion de la Hamburguesa
 function toggleMenu() {
     const body = document.getElementById('contentBody');
     const icon = document.getElementById('hamburgerIcon');
@@ -6,21 +6,28 @@ function toggleMenu() {
     icon.classList.toggle('open');
 }
 
-// 2. Validación del Formulario
+// 2. Bloqueo de letras en el campo Edad en tiempo real
+document.getElementById('edad').addEventListener('input', function (e) {
+    // Reemplaza cualquier caracter que NO sea un numero del 0 al 9
+    this.value = this.value.replace(/[^0-9]/g, '');
+});
+
+// 3. Validacion del Formulario
 document.getElementById('formulario').addEventListener('submit', function(e) {
-    e.preventDefault(); // Evita que la página se recargue
+    e.preventDefault();
     let isValid = true;
 
-    // Validar Nombre (Mínimo 3 letras)
+    // Validar Nombre (Solo letras y espacios, minimo 3)
     const nombre = document.getElementById('nombre');
-    if (nombre.value.trim().length < 3) {
+    const regexNombre = /^[A-Za-z\s]{3,}$/; 
+    if (!regexNombre.test(nombre.value.trim())) {
         nombre.classList.add('is-invalid'); 
         isValid = false;
     } else { 
         nombre.classList.remove('is-invalid'); 
     }
 
-    // Validar Correo Electrónico (Regex)
+    // Validar Correo Electronico
     const correo = document.getElementById('correo');
     const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!regexEmail.test(correo.value)) {
@@ -30,7 +37,7 @@ document.getElementById('formulario').addEventListener('submit', function(e) {
         correo.classList.remove('is-invalid'); 
     }
 
-    // Validar Contraseña (Mínimo 8 caracteres, 1 mayúscula, 1 número)
+    // Validar Contrasena (Minimo 8 caracteres, 1 mayuscula, 1 numero)
     const pass = document.getElementById('pass');
     const regexPass = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
     if (!regexPass.test(pass.value)) {
@@ -40,7 +47,7 @@ document.getElementById('formulario').addEventListener('submit', function(e) {
         pass.classList.remove('is-invalid'); 
     }
 
-    // Validar Edad (Mayor o igual a 18)
+    // Validar Edad (Solo numeros, mayor o igual a 18)
     const edad = document.getElementById('edad');
     if (edad.value === '' || Number(edad.value) < 18) {
         edad.classList.add('is-invalid'); 
@@ -49,7 +56,7 @@ document.getElementById('formulario').addEventListener('submit', function(e) {
         edad.classList.remove('is-invalid'); 
     }
 
-    // Validar Términos y Condiciones
+    // Validar Terminos y Condiciones
     const terminos = document.getElementById('terminos');
     if (!terminos.checked) {
         document.getElementById('err-term').style.display = 'block'; 
@@ -58,12 +65,12 @@ document.getElementById('formulario').addEventListener('submit', function(e) {
         document.getElementById('err-term').style.display = 'none'; 
     }
 
-    // Si todo está correcto, mostrar éxito
+    // Si todo esta correcto, mostrar exito
     if (isValid) {
         document.getElementById('msjExito').style.display = 'block';
-        this.reset(); // Limpia el formulario
+        this.reset(); 
         setTimeout(() => { 
             document.getElementById('msjExito').style.display = 'none'; 
-        }, 3000); // Oculta el mensaje en 3 segundos
+        }, 3000); 
     }
 });
