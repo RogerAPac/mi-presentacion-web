@@ -25,7 +25,7 @@ body {
     border-bottom: 4px solid var(--accent); 
 }
 
-/* 3. Sección Principal (Hamburguesa) */
+/* 3. Seccion Principal (Hamburguesa) */
 .main-container { 
     max-width: 800px; 
     margin: 20px auto; 
@@ -93,7 +93,7 @@ body {
     font-size: 12px; 
 }
 
-/* Frase Gráfica */
+/* Frase Grafica */
 .frase-box { 
     background: linear-gradient(135deg, var(--primary), #134074); 
     color: white; 
@@ -104,7 +104,7 @@ body {
     margin-top: 15px; 
 }
 
-/* Tabs Música y Juegos */
+/* Tabs Musica y Juegos */
 .nav-tabs .nav-link { 
     color: var(--primary); 
     font-size: 14px; 
@@ -123,6 +123,17 @@ body {
 }
 .list-group-item:hover { 
     background-color: #ffe4d6; 
+}
+
+/* NUEVO: Estilo para las imagenes de favoritos */
+.fav-img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    background-color: #f1f5f9;
+    border-radius: 6px;
+    margin-right: 15px;
+    padding: 3px;
 }
 
 /* Formulario */
