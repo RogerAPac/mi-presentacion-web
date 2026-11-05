@@ -1,0 +1,157 @@
+:root {
+    --primary: #0b2545; 
+    --accent: #f97316; 
+    --light: #f8fafc;
+}
+
+body { 
+    font-family: 'Poppins', sans-serif; 
+    background-color: var(--light); 
+}
+
+/* 1. NavBar Minimalista */
+.navbar { 
+    background-color: var(--primary) !important; 
+}
+.navbar-brand { 
+    color: white !important; 
+    font-weight: 600; 
+}
+
+/* 2. Carrusel */
+.carousel-item img { 
+    height: 300px; 
+    object-fit: cover; 
+    border-bottom: 4px solid var(--accent); 
+}
+
+/* 3. Sección Principal (Hamburguesa) */
+.main-container { 
+    max-width: 800px; 
+    margin: 20px auto; 
+    background: white; 
+    border-radius: 12px; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
+    overflow: hidden; 
+}
+
+.hamburger-header { 
+    background: var(--light); 
+    padding: 15px 20px; 
+    cursor: pointer; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    border-bottom: 1px solid #e2e8f0; 
+}
+.hamburger-header h4 { 
+    margin: 0; 
+    font-size: 16px; 
+    color: var(--primary); 
+    font-weight: 600; 
+}
+.hamburger-icon { 
+    font-size: 20px; 
+    color: var(--accent); 
+    transition: transform 0.3s; 
+}
+.hamburger-icon.open { 
+    transform: rotate(90deg); 
+}
+
+.content-body { 
+    display: none; 
+    padding: 20px; 
+    animation: fadeIn 0.4s; 
+}
+.content-body.open { 
+    display: block; 
+}
+@keyframes fadeIn { 
+    from { opacity: 0; } 
+    to { opacity: 1; } 
+}
+
+/* 4. Estilos Internos */
+.section-title { 
+    font-size: 14px; 
+    color: var(--accent); 
+    font-weight: 600; 
+    text-transform: uppercase; 
+    margin-bottom: 10px; 
+    border-bottom: 2px solid var(--accent); 
+    display: inline-block; 
+}
+
+/* Horario */
+.horario-table th { 
+    background-color: var(--primary); 
+    color: white; 
+    font-size: 12px; 
+}
+.horario-table td { 
+    font-size: 12px; 
+}
+
+/* Frase Gráfica */
+.frase-box { 
+    background: linear-gradient(135deg, var(--primary), #134074); 
+    color: white; 
+    padding: 20px; 
+    border-radius: 8px; 
+    text-align: center; 
+    font-style: italic; 
+    margin-top: 15px; 
+}
+
+/* Tabs Música y Juegos */
+.nav-tabs .nav-link { 
+    color: var(--primary); 
+    font-size: 14px; 
+    font-weight: 600; 
+    border: none; 
+}
+.nav-tabs .nav-link.active { 
+    color: var(--accent); 
+    border-bottom: 2px solid var(--accent); 
+    background: none; 
+}
+.list-group-item { 
+    font-size: 13px; 
+    cursor: pointer; 
+    transition: background 0.2s; 
+}
+.list-group-item:hover { 
+    background-color: #ffe4d6; 
+}
+
+/* Formulario */
+.form-control { 
+    font-size: 13px; 
+}
+.error-text { 
+    color: #dc2626; 
+    font-size: 11px; 
+    display: none; 
+}
+.is-invalid + .error-text { 
+    display: block; 
+}
+
+/* Footer 3 R.S. */
+footer { 
+    text-align: center; 
+    padding: 20px; 
+    background: var(--primary); 
+    color: white; 
+    margin-top: 30px; 
+}
+footer a { 
+    color: white; 
+    font-size: 20px; 
+    margin: 0 10px; 
+    transition: color 0.3s; 
+}
+footer a:hover { 
+    color: var(--accent); 
+}

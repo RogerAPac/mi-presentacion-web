@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentación Personal - Ing. Miguel Ángel Cruz R.</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome (Iconos) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts (Poppins) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- TU ARCHIVO CSS -->
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+    <!-- 1. NavBar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="#">Ing. Miguel Ángel Cruz R.</a>
+        </div>
+    </nav>
+
+    <!-- 2. Carrusel de 3 Fotos -->
+    <div id="carruselFotos" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1000&q=80" class="d-block w-100" alt="Foto 1">
+            </div>
+            <div class="carousel-item">
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80" class="d-block w-100" alt="Foto 2">
+            </div>
+            <div class="carousel-item">
+                <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1000&q=80" class="d-block w-100" alt="Foto 3">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carruselFotos" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carruselFotos" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+
+    <!-- Contenedor Principal (Hamburguesa) -->
+    <div class="main-container">
+        <div class="hamburger-header" onclick="toggleMenu()">
+            <h4><i class="fas fa-user-circle me-2"></i> Mi Información Personal</h4>
+            <i class="fas fa-bars hamburger-icon" id="hamburgerIcon"></i>
+        </div>
+
+        <!-- Contenido que se despliega -->
+        <div class="content-body" id="contentBody">
+            
+            <div class="row">
+                <!-- Pasatiempos e Intereses -->
+                <div class="col-md-6 mb-3">
+                    <span class="section-title">Pasatiempos (No modelito)</span>
+                    <p class="small text-muted">Leer sobre tecnología, hacer ejercicio al aire libre, armar rompecabezas lógicos y aprender nuevas librerías de JavaScript en mi tiempo libre.</p>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <span class="section-title">Intereses (Productivo)</span>
+                    <p class="small text-muted">Desarrollo de software web, ciberseguridad, docencia superior e implementación de proyectos socioproductivos para la comunidad.</p>
+                </div>
+            </div>
+
+            <!-- Horario (Sheets) -->
+            <div class="mb-4">
+                <span class="section-title">Mi Horario</span>
+                <table class="table table-bordered horario-table text-center mb-0">
+                    <thead>
+                        <tr><th>Hora</th><th>Lunes</th><th>Martes</th><th>Miércoles</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>07:00 - 10:00</td><td>Diseño Web II</td><td>Base de Datos</td><td>Diseño Web II</td></tr>
+                        <tr><td>10:00 - 13:00</td><td>Libre</td><td>Programación</td><td>Libre</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Música y Juegos (Tabs Bootstrap) -->
+            <div class="mb-4">
+                <span class="section-title">Favoritos (Doble Selección)</span>
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#musica" type="button">?? Música</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#juegos" type="button">?? Juegos</button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="musica">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" onclick="alert('Reproduciendo: Torero - Chayanne')">?? Torero - Chayanne</li>
+                            <li class="list-group-item" onclick="alert('Reproduciendo: Mujeres - Ricardo Arjona')">?? Mujeres - Ricardo Arjona</li>
+                            <li class="list-group-item" onclick="alert('Reproduciendo: Tiempo de Vals - Chayanne')">?? Tiempo de Vals - Chayanne</li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane fade" id="juegos">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">?? Mario Kart 8</li>
+                            <li class="list-group-item">?? The Legend of Zelda</li>
+                            <li class="list-group-item">?? FIFA 24</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Frase Gráfica -->
+            <div class="frase-box">
+                "El éxito es la suma de pequeños esfuerzos repetidos día tras día."
+                <br><i class="fas fa-quote-right mt-2 text-warning"></i>
+            </div>
+
+            <hr class="my-4">
+
+            <!-- Formulario con Validaciones -->
+            <div>
+                <span class="section-title">Formulario de Contacto</span>
+                <form id="formulario" novalidate>
+                    <div class="row">
+                        <div class="col-md-6 mb-2">
+                            <input type="text" class="form-control" id="nombre" placeholder="Nombre completo">
+                            <div class="error-text">Mínimo 3 letras.</div>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <input type="email" class="form-control" id="correo" placeholder="Correo electrónico">
+                            <div class="error-text">Correo inválido.</div>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <input type="password" class="form-control" id="pass" placeholder="Contraseña (Mayús + Núm)">
+                            <div class="error-text">Mín. 8 caract, 1 mayúscula y 1 número.</div>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <input type="number" class="form-control" id="edad" placeholder="Edad (= 18)">
+                            <div class="error-text">Debes ser mayor de 18 años.</div>
+                        </div>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="terminos">
+                        <label class="form-check-label small" for="terminos">Acepto los términos</label>
+                        <div class="error-text" id="err-term">Obligatorio.</div>
+                    </div>
+                    <button type="submit" class="btn btn-warning w-100 text-white fw-bold" style="background-color: var(--accent); border:none;">Enviar Formulario</button>
+                    <div id="msjExito" class="text-success text-center mt-2 small fw-bold" style="display:none;">¡Formulario enviado con éxito!</div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer 3 R.S. -->
+    <footer>
+        <p class="small mb-2">Conéctate conmigo (3 R.S.)</p>
+        <a href="https://github.com/" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com/" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://facebook.com/" target="_blank"><i class="fab fa-facebook"></i></a>
+        <br>
+        <span class="small mt-2 d-block">© 2026 UPDS - Diseño Web II</span>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- TU ARCHIVO JS -->
+    <script src="script.js"></script>
+</body>
+</html>
