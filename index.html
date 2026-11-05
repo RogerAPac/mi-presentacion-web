@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Presentación Personal - Ing. Miguel Ángel Cruz R.</title>
+    <title>Presentacion Personal - Roger Paredes</title>
     
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -20,7 +20,7 @@
     <!-- 1. NavBar -->
     <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand" href="#">Ing. Miguel Ángel Cruz R.</a>
+            <a class="navbar-brand" href="#">Roger Paredes</a>
         </div>
     </nav>
 
@@ -48,7 +48,7 @@
     <!-- Contenedor Principal (Hamburguesa) -->
     <div class="main-container">
         <div class="hamburger-header" onclick="toggleMenu()">
-            <h4><i class="fas fa-user-circle me-2"></i> Mi Información Personal</h4>
+            <h4><i class="fas fa-user-circle me-2"></i> Mi Informacion Personal</h4>
             <i class="fas fa-bars hamburger-icon" id="hamburgerIcon"></i>
         </div>
 
@@ -58,12 +58,12 @@
             <div class="row">
                 <!-- Pasatiempos e Intereses -->
                 <div class="col-md-6 mb-3">
-                    <span class="section-title">Pasatiempos (No modelito)</span>
-                    <p class="small text-muted">Leer sobre tecnología, hacer ejercicio al aire libre, armar rompecabezas lógicos y aprender nuevas librerías de JavaScript en mi tiempo libre.</p>
+                    <span class="section-title">Pasatiempos</span>
+                    <p class="small text-muted">Jugar videojuegos retro y de futbol, escuchar rock clasico a todo volumen, y aprender nuevas librerias de JavaScript en mi tiempo libre.</p>
                 </div>
                 <div class="col-md-6 mb-3">
                     <span class="section-title">Intereses (Productivo)</span>
-                    <p class="small text-muted">Desarrollo de software web, ciberseguridad, docencia superior e implementación de proyectos socioproductivos para la comunidad.</p>
+                    <p class="small text-muted">Desarrollo de software web, ciberseguridad, docencia superior e implementacion de proyectos socioproductivos para la comunidad.</p>
                 </div>
             </div>
 
@@ -72,47 +72,69 @@
                 <span class="section-title">Mi Horario</span>
                 <table class="table table-bordered horario-table text-center mb-0">
                     <thead>
-                        <tr><th>Hora</th><th>Lunes</th><th>Martes</th><th>Miércoles</th></tr>
+                        <tr><th>Hora</th><th>Lunes</th><th>Martes</th><th>Miercoles</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td>07:00 - 10:00</td><td>Diseño Web II</td><td>Base de Datos</td><td>Diseño Web II</td></tr>
-                        <tr><td>10:00 - 13:00</td><td>Libre</td><td>Programación</td><td>Libre</td></tr>
+                        <tr><td>07:00 - 10:00</td><td>Diseno Web II</td><td>Base de Datos</td><td>Diseno Web II</td></tr>
+                        <tr><td>10:00 - 13:00</td><td>Libre</td><td>Programacion</td><td>Libre</td></tr>
                     </tbody>
                 </table>
             </div>
 
-            <!-- Música y Juegos (Tabs Bootstrap) -->
+            <!-- Musica y Juegos (Tabs Bootstrap) -->
             <div class="mb-4">
-                <span class="section-title">Favoritos (Doble Selección)</span>
+                <span class="section-title">Favoritos (Doble Seleccion)</span>
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#musica" type="button">?? Música</button>
+                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#musica" type="button">Musica</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#juegos" type="button">?? Juegos</button>
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#juegos" type="button">Juegos</button>
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
+                    
+                    <!-- PestaÃ±a Musica (AC/DC) -->
                     <div class="tab-pane fade show active" id="musica">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item" onclick="alert('Reproduciendo: Torero - Chayanne')">?? Torero - Chayanne</li>
-                            <li class="list-group-item" onclick="alert('Reproduciendo: Mujeres - Ricardo Arjona')">?? Mujeres - Ricardo Arjona</li>
-                            <li class="list-group-item" onclick="alert('Reproduciendo: Tiempo de Vals - Chayanne')">?? Tiempo de Vals - Chayanne</li>
+                            <li class="list-group-item d-flex align-items-center" onclick="alert('Reproduciendo: Back In Black - AC/DC')">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/ACDC_logo.svg/200px-ACDC_logo.svg.png" class="fav-img" alt="ACDC">
+                                <span>Back In Black - AC/DC</span>
+                            </li>
+                            <li class="list-group-item d-flex align-items-center" onclick="alert('Reproduciendo: Thunderstruck - AC/DC')">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/ACDC_logo.svg/200px-ACDC_logo.svg.png" class="fav-img" alt="ACDC">
+                                <span>Thunderstruck - AC/DC</span>
+                            </li>
+                            <li class="list-group-item d-flex align-items-center" onclick="alert('Reproduciendo: Highway to Hell - AC/DC')">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/ACDC_logo.svg/200px-ACDC_logo.svg.png" class="fav-img" alt="ACDC">
+                                <span>Highway to Hell - AC/DC</span>
+                            </li>
                         </ul>
                     </div>
+                    
+                    <!-- PestaÃ±a Juegos (eFootball, Pokemon, PES) -->
                     <div class="tab-pane fade" id="juegos">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">?? Mario Kart 8</li>
-                            <li class="list-group-item">?? The Legend of Zelda</li>
-                            <li class="list-group-item">?? FIFA 24</li>
+                            <li class="list-group-item d-flex align-items-center">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/EFootball_logo.svg/200px-EFootball_logo.svg.png" class="fav-img" alt="eFootball">
+                                <span>eFootball</span>
+                            </li>
+                            <li class="list-group-item d-flex align-items-center">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Pokemon_Radical_Red_Logo.png/200px-Pokemon_Radical_Red_Logo.png" class="fav-img" alt="Pokemon Radical Red">
+                                <span>Pokemon Radical Red</span>
+                            </li>
+                            <li class="list-group-item d-flex align-items-center">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Pro_Evolution_Soccer_logo.svg/200px-Pro_Evolution_Soccer_logo.svg.png" class="fav-img" alt="PES 2011">
+                                <span>PES 2011</span>
+                            </li>
                         </ul>
                     </div>
                 </div>
             </div>
 
-            <!-- Frase Gráfica -->
+            <!-- Frase Grafica -->
             <div class="frase-box">
-                "El éxito es la suma de pequeños esfuerzos repetidos día tras día."
+                "Del fracaso se aprende, sobre todo si no se pierde la voluntad."
                 <br><i class="fas fa-quote-right mt-2 text-warning"></i>
             </div>
 
@@ -125,28 +147,28 @@
                     <div class="row">
                         <div class="col-md-6 mb-2">
                             <input type="text" class="form-control" id="nombre" placeholder="Nombre completo">
-                            <div class="error-text">Mínimo 3 letras.</div>
+                            <div class="error-text">Solo letras, minimo 3 letras.</div>
                         </div>
                         <div class="col-md-6 mb-2">
-                            <input type="email" class="form-control" id="correo" placeholder="Correo electrónico">
-                            <div class="error-text">Correo inválido.</div>
+                            <input type="email" class="form-control" id="correo" placeholder="Correo electronico">
+                            <div class="error-text">Correo invalido.</div>
                         </div>
                         <div class="col-md-6 mb-2">
-                            <input type="password" class="form-control" id="pass" placeholder="Contraseña (Mayús + Núm)">
-                            <div class="error-text">Mín. 8 caract, 1 mayúscula y 1 número.</div>
+                            <input type="password" class="form-control" id="pass" placeholder="Contrasena (Mayuscula + Numero)">
+                            <div class="error-text">Min. 8 caract, 1 mayuscula y 1 numero.</div>
                         </div>
                         <div class="col-md-6 mb-2">
-                            <input type="number" class="form-control" id="edad" placeholder="Edad (= 18)">
-                            <div class="error-text">Debes ser mayor de 18 años.</div>
+                            <input type="text" class="form-control" id="edad" placeholder="Edad (mayor o igual a 18)">
+                            <div class="error-text">Solo numeros. Debes ser mayor de 18 anos.</div>
                         </div>
                     </div>
                     <div class="form-check mb-2">
                         <input class="form-check-input" type="checkbox" id="terminos">
-                        <label class="form-check-label small" for="terminos">Acepto los términos</label>
+                        <label class="form-check-label small" for="terminos">Acepto los terminos</label>
                         <div class="error-text" id="err-term">Obligatorio.</div>
                     </div>
                     <button type="submit" class="btn btn-warning w-100 text-white fw-bold" style="background-color: var(--accent); border:none;">Enviar Formulario</button>
-                    <div id="msjExito" class="text-success text-center mt-2 small fw-bold" style="display:none;">¡Formulario enviado con éxito!</div>
+                    <div id="msjExito" class="text-success text-center mt-2 small fw-bold" style="display:none;">Formulario enviado con exito!</div>
                 </form>
             </div>
 
@@ -155,12 +177,12 @@
 
     <!-- Footer 3 R.S. -->
     <footer>
-        <p class="small mb-2">Conéctate conmigo (3 R.S.)</p>
+        <p class="small mb-2">Conectate conmigo (3 R.S.)</p>
         <a href="https://github.com/" target="_blank"><i class="fab fa-github"></i></a>
         <a href="https://linkedin.com/" target="_blank"><i class="fab fa-linkedin"></i></a>
         <a href="https://facebook.com/" target="_blank"><i class="fab fa-facebook"></i></a>
         <br>
-        <span class="small mt-2 d-block">© 2026 UPDS - Diseño Web II</span>
+        <span class="small mt-2 d-block">2026 UPDS - Diseno Web II</span>
     </footer>
 
     <!-- Bootstrap JS -->
