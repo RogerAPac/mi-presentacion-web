@@ -1,6 +1,6 @@
 :root {
     --bg-dark: #0a0a0a;
-    --primary-green: #39ff14; /* Verde Neón */
+    --primary-green: #39ff14; 
     --dark-gray: #1a1a1a;
     --text-light: #e0e0e0;
 }
@@ -9,15 +9,13 @@ body {
     font-family: 'Poppins', sans-serif; 
     background-color: var(--bg-dark); 
     color: var(--text-light);
-    transition: background 0.5s ease; /* Transicion para el fondo dinamico */
+    transition: background 0.5s ease; 
 }
 
-/* Fondos Dinamicos (Reto PRO jQuery) */
 body.theme-pc { background: linear-gradient(135deg, #0a0a0a 0%, #003300 100%); }
 body.theme-ps5 { background: linear-gradient(135deg, #0a0a0a 0%, #001a33 100%); }
 body.theme-xbox { background: linear-gradient(135deg, #0a0a0a 0%, #1a3300 100%); }
 
-/* NavBar */
 .navbar { 
     background-color: rgba(10, 10, 10, 0.9) !important;
     border-bottom: 2px solid var(--primary-green);
@@ -29,20 +27,17 @@ body.theme-xbox { background: linear-gradient(135deg, #0a0a0a 0%, #1a3300 100%);
     text-transform: uppercase;
 }
 
-/* Carrusel */
 .carousel-item img { 
     height: 350px; 
     object-fit: cover; 
     border-bottom: 4px solid var(--primary-green); 
 }
 
-/* Contenedor Principal */
 .main-container { 
     max-width: 800px; 
     margin: 0 auto 40px auto; 
 }
 
-/* Selector de Consolas */
 #main-icon i { font-size: 50px; color: var(--primary-green); margin-bottom: 10px; }
 .btn-console { 
     border-color: var(--primary-green); 
@@ -55,7 +50,6 @@ body.theme-xbox { background: linear-gradient(135deg, #0a0a0a 0%, #1a3300 100%);
     box-shadow: 0 0 10px var(--primary-green);
 }
 
-/* Secciones (Hamburguesa) */
 .section-box { 
     background: var(--dark-gray); 
     border-radius: 12px; 
@@ -85,12 +79,8 @@ body.theme-xbox { background: linear-gradient(135deg, #0a0a0a 0%, #1a3300 100%);
 }
 .hamburger-icon.open { transform: rotate(90deg); }
 
-.content-body { 
-    display: none; 
-    padding: 20px; 
-}
+.content-body { display: none; padding: 20px; }
 
-/* Acordeones (jQuery) */
 .console-card { margin-bottom: 10px; }
 .accordion-btn { 
     background: #222; 
@@ -110,7 +100,42 @@ body.theme-xbox { background: linear-gradient(135deg, #0a0a0a 0%, #1a3300 100%);
     font-size: 14px;
 }
 
-/* Lista de Juegos (Filtro) */
+/* Estilos para las 10 Estaciones (PC, PS5, Xbox) */
+.station-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 8px;
+    margin-top: 10px;
+}
+.station {
+    padding: 8px;
+    text-align: center;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid #444;
+}
+.station.available {
+    background-color: rgba(57, 255, 20, 0.1);
+    color: var(--primary-green);
+    border-color: var(--primary-green);
+}
+.station.busy {
+    background-color: rgba(255, 51, 51, 0.1);
+    color: #ff3333;
+    border-color: #ff3333;
+    text-decoration: line-through;
+}
+
+/* Lista de Juegos */
+.game-list {
+    max-height: 250px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+.game-list::-webkit-scrollbar { width: 6px; }
+.game-list::-webkit-scrollbar-thumb { background: var(--primary-green); border-radius: 3px; }
+
 .juego-item { 
     background: #222; 
     padding: 10px 15px; 
@@ -122,7 +147,6 @@ body.theme-xbox { background: linear-gradient(135deg, #0a0a0a 0%, #1a3300 100%);
     font-size: 14px;
 }
 
-/* Formulario */
 .form-control, .form-select { 
     background-color: #222; 
     border: 1px solid #444; 
@@ -142,7 +166,6 @@ body.theme-xbox { background: linear-gradient(135deg, #0a0a0a 0%, #1a3300 100%);
 }
 .is-invalid + .error-text { display: block; }
 
-/* Footer */
 footer { 
     text-align: center; 
     padding: 30px; 
