@@ -25,7 +25,7 @@
         </div>
     </nav>
 
-    <!-- 2. Carrusel de 3 Fotos (Gamer) -->
+    <!-- 2. Carrusel de 3 Fotos -->
     <div id="carruselFotos" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
@@ -49,7 +49,7 @@
     <!-- Contenedor Principal -->
     <div class="main-container mt-4">
         
-        <!-- SELECTOR DINÁMICO DE CONSOLAS (RETO PRO JQUERY) -->
+        <!-- SELECTOR DINÁMICO -->
         <div class="console-selector text-center mb-4" id="console-selector">
             <h4 class="text-white mb-3" id="main-icon"><i class="fas fa-desktop"></i></h4>
             <button class="btn btn-outline-success btn-console active" data-target="pc">PC Gamer</button>
@@ -57,65 +57,96 @@
             <button class="btn btn-outline-success btn-console" data-target="xbox">Xbox 360</button>
         </div>
 
-        <!-- SECCIÓN 1: SERVICIOS (ACORDEÓN HAMBURGUESA) -->
+        <!-- SECCIÓN 1: SERVICIOS Y 10 ESTACIONES -->
         <div class="section-box mb-3">
             <div class="hamburger-header" onclick="toggleMenu('secServicios')">
-                <h4><i class="fas fa-list me-2"></i> Nuestros Servicios y Tarifas</h4>
+                <h4><i class="fas fa-list me-2"></i> Estaciones y Tarifas Disponibles</h4>
                 <i class="fas fa-bars hamburger-icon" id="icon-secServicios"></i>
             </div>
             <div class="content-body" id="secServicios">
                 
-                <!-- Ficha PC -->
+                <!-- PC GAMER (10 PCs) -->
                 <div class="console-card" id="card-pc">
-                    <div class="accordion-btn">▼ Ver Detalles: PC Gamer (High-End)</div>
+                    <div class="accordion-btn">▼ Tarifas PC Gamer y Disponibilidad</div>
                     <div class="accordion-panel">
-                        <p class="mb-1"><strong>Especificaciones:</strong> RTX 4070, 32GB RAM, Monitor 240Hz.</p>
-                        <p class="mb-0"><strong>Tarifa:</strong> 15 Bs / hora (Promo: 3 horas por 40 Bs).</p>
+                        <p class="mb-2 text-success"><strong>Tarifas:</strong> 1 Hora = 15 Bs | 3 Horas = 40 Bs | 5 Horas = 60 Bs.</p>
+                        <div class="station-grid">
+                            <!-- Generamos 10 estaciones visuales -->
+                            <span class="station available">PC-01</span><span class="station available">PC-02</span>
+                            <span class="station busy">PC-03 (Ocupada)</span><span class="station available">PC-04</span>
+                            <span class="station available">PC-05</span><span class="station available">PC-06</span>
+                            <span class="station busy">PC-07 (Ocupada)</span><span class="station available">PC-08</span>
+                            <span class="station available">PC-09</span><span class="station available">PC-10</span>
+                        </div>
                     </div>
                 </div>
                 
-                <!-- Ficha PS5 -->
+                <!-- PS5 (10 Consolas) -->
                 <div class="console-card" id="card-ps5" style="display: none;">
-                    <div class="accordion-btn">▼ Ver Detalles: PlayStation 5</div>
+                    <div class="accordion-btn">▼ Tarifas PlayStation 5 y Disponibilidad</div>
                     <div class="accordion-panel">
-                        <p class="mb-1"><strong>Especificaciones:</strong> Pantalla 4K, 2 Controles DualSense, FIFA, Mortal Kombat.</p>
-                        <p class="mb-0"><strong>Tarifa:</strong> 12 Bs / hora.</p>
+                        <p class="mb-2 text-success"><strong>Tarifas:</strong> 1 Hora = 12 Bs | 2 Horas = 20 Bs.</p>
+                        <div class="station-grid">
+                            <span class="station available">PS5-01</span><span class="station busy">PS5-02 (Ocupada)</span>
+                            <span class="station available">PS5-03</span><span class="station available">PS5-04</span>
+                            <span class="station available">PS5-05</span><span class="station busy">PS5-06 (Ocupada)</span>
+                            <span class="station available">PS5-07</span><span class="station available">PS5-08</span>
+                            <span class="station available">PS5-09</span><span class="station available">PS5-10</span>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Ficha Xbox 360 -->
+                <!-- XBOX 360 (10 Consolas) -->
                 <div class="console-card" id="card-xbox" style="display: none;">
-                    <div class="accordion-btn">▼ Ver Detalles: Xbox 360 (Retro)</div>
+                    <div class="accordion-btn">▼ Tarifas Xbox 360 y Disponibilidad</div>
                     <div class="accordion-panel">
-                        <p class="mb-1"><strong>Especificaciones:</strong> 4 Controles, Halo 3, Gears of War, PES 2013.</p>
-                        <p class="mb-0"><strong>Tarifa:</strong> 8 Bs / hora.</p>
+                        <p class="mb-2 text-success"><strong>Tarifas:</strong> 1 Hora = 8 Bs | 3 Horas = 20 Bs.</p>
+                        <div class="station-grid">
+                            <span class="station available">X360-01</span><span class="station available">X360-02</span>
+                            <span class="station available">X360-03</span><span class="station available">X360-04</span>
+                            <span class="station available">X360-05</span><span class="station available">X360-06</span>
+                            <span class="station available">X360-07</span><span class="station available">X360-08</span>
+                            <span class="station available">X360-09</span><span class="station available">X360-10</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- SECCIÓN 2: FILTRO DE JUEGOS (ACORDEÓN HAMBURGUESA) -->
+        <!-- SECCIÓN 2: BUSCADOR DE JUEGOS (MÁS DATOS) -->
         <div class="section-box mb-3">
             <div class="hamburger-header" onclick="toggleMenu('secJuegos')">
-                <h4><i class="fas fa-search me-2"></i> Buscador de Juegos</h4>
+                <h4><i class="fas fa-search me-2"></i> Buscador de Juegos (Catálogo)</h4>
                 <i class="fas fa-bars hamburger-icon" id="icon-secJuegos"></i>
             </div>
             <div class="content-body" id="secJuegos">
-                <input type="text" id="buscador-juegos" class="form-control mb-3 bg-dark text-white border-success" placeholder="Buscar juego (ej: Halo, FIFA, GTA)...">
+                <input type="text" id="buscador-juegos" class="form-control mb-3 bg-dark text-white border-success" placeholder="Escribe para buscar (ej: Halo, FIFA, GTA, Mario)...">
                 
-                <div id="lista-juegos">
+                <div id="lista-juegos" class="game-list">
+                    <!-- Juegos de PC -->
+                    <div class="juego-item" data-nombre="League of Legends">League of Legends <span class="badge bg-success">PC</span></div>
+                    <div class="juego-item" data-nombre="Valorant">Valorant <span class="badge bg-success">PC</span></div>
+                    <div class="juego-item" data-nombre="GTA V">GTA V <span class="badge bg-success">PC</span></div>
+                    <div class="juego-item" data-nombre="Counter Strike 2">Counter Strike 2 <span class="badge bg-success">PC</span></div>
+                    <div class="juego-item" data-nombre="Minecraft">Minecraft <span class="badge bg-success">PC</span></div>
+                    <div class="juego-item" data-nombre="Fortnite">Fortnite <span class="badge bg-success">PC</span></div>
+                    <!-- Juegos de PS5 -->
+                    <div class="juego-item" data-nombre="FIFA 24">EA Sports FC 24 <span class="badge bg-success">PS5</span></div>
+                    <div class="juego-item" data-nombre="Mortal Kombat 1">Mortal Kombat 1 <span class="badge bg-success">PS5</span></div>
+                    <div class="juego-item" data-nombre="Spider-Man 2">Spider-Man 2 <span class="badge bg-success">PS5</span></div>
+                    <div class="juego-item" data-nombre="God of War Ragnarok">God of War Ragnarok <span class="badge bg-success">PS5</span></div>
+                    <div class="juego-item" data-nombre="Call of Duty MW3">Call of Duty MW3 <span class="badge bg-success">PS5</span></div>
+                    <!-- Juegos de Xbox 360 -->
                     <div class="juego-item" data-nombre="Halo 3">Halo 3 <span class="badge bg-success">Xbox 360</span></div>
                     <div class="juego-item" data-nombre="Gears of War 2">Gears of War 2 <span class="badge bg-success">Xbox 360</span></div>
-                    <div class="juego-item" data-nombre="FIFA 23">FIFA 23 <span class="badge bg-success">PS5</span></div>
-                    <div class="juego-item" data-nombre="Mortal Kombat 1">Mortal Kombat 1 <span class="badge bg-success">PS5</span></div>
-                    <div class="juego-item" data-nombre="GTA V">GTA V <span class="badge bg-success">PC</span></div>
-                    <div class="juego-item" data-nombre="Valorant">Valorant <span class="badge bg-success">PC</span></div>
-                    <div class="juego-item" data-nombre="League of Legends">League of Legends <span class="badge bg-success">PC</span></div>
+                    <div class="juego-item" data-nombre="PES 2013">PES 2013 <span class="badge bg-success">Xbox 360</span></div>
+                    <div class="juego-item" data-nombre="FIFA 14">FIFA 14 <span class="badge bg-success">Xbox 360</span></div>
+                    <div class="juego-item" data-nombre="Grand Theft Auto San Andreas">GTA San Andreas <span class="badge bg-success">Xbox 360</span></div>
                 </div>
             </div>
         </div>
 
-        <!-- SECCIÓN 3: RESERVAS (ACORDEÓN HAMBURGUESA) -->
+        <!-- SECCIÓN 3: RESERVAS -->
         <div class="section-box mb-3">
             <div class="hamburger-header" onclick="toggleMenu('secReserva')">
                 <h4><i class="fas fa-calendar-check me-2"></i> Reservar Estación</h4>
@@ -134,10 +165,10 @@
                         </div>
                         <div class="col-md-6 mb-2">
                             <select class="form-select" id="consola-reserva">
-                                <option value="">Seleccione Consola...</option>
-                                <option value="PC">PC Gamer</option>
-                                <option value="PS5">PlayStation 5</option>
-                                <option value="Xbox">Xbox 360</option>
+                                <option value="">Seleccione Estación...</option>
+                                <option value="PC">PC Gamer (Cualquiera)</option>
+                                <option value="PS5">PlayStation 5 (Cualquiera)</option>
+                                <option value="Xbox">Xbox 360 (Cualquiera)</option>
                             </select>
                             <div class="error-text">Seleccione una consola.</div>
                         </div>
@@ -147,7 +178,7 @@
                         </div>
                     </div>
                     <button type="submit" class="btn btn-success w-100 fw-bold mt-2">Confirmar Reserva</button>
-                    <div id="msjExito" class="text-success text-center mt-2 small fw-bold" style="display:none;">Reserva confirmada con exito!</div>
+                    <div id="msjExito" class="text-success text-center mt-2 small fw-bold" style="display:none;">Reserva confirmada con exito! Te esperamos.</div>
                 </form>
             </div>
         </div>
@@ -164,12 +195,8 @@
         <span class="small mt-2 d-block">2026 Majora Games - Diseno Web II</span>
     </footer>
 
-    <!-- jQuery (Requerido por la guia del docente) -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- TU ARCHIVO JS -->
     <script src="script.js"></script>
 </body>
 </html>
