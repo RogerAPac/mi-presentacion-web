@@ -2,8 +2,7 @@ $(document).ready(function() {
 
     // 1. RELOJ
     function updateClock() {
-        let now = new Date();
-        $('#liveClock').text(now.toLocaleTimeString('es-ES'));
+        $('#liveClock').text(new Date().toLocaleTimeString('es-ES'));
     }
     setInterval(updateClock, 1000);
     updateClock();
@@ -16,13 +15,10 @@ $(document).ready(function() {
         'bebidas': [{ name: 'Coca Cola', icon: 'fa-glass-whiskey' }, { name: 'Pepsi', icon: 'fa-glass-whiskey' }, { name: 'Papas Lays', icon: 'fa-cookie' }, { name: 'Chocolate', icon: 'fa-candy-cane' }]
     };
 
-    let currentService = '';
-    let currentPricePerHour = 0;
-    let currentStation = '';
-    let timerInterval;
-    let modalInstance = null;
+    let currentService = '', currentPricePerHour = 0, currentStation = '';
+    let timerInterval, modalInstance = null;
 
-    // 3. SELECCIÓN DE MENÚ
+    // 3. SELECCIÓN DE MENÚ (PC, PS5, XBOX, BEBIDAS)
     $('.giant-btn').click(function() {
         currentService = $(this).data('target');
         
@@ -32,20 +28,21 @@ $(document).ready(function() {
         if (currentService === 'bebidas') currentPricePerHour = 0;
 
         $('#mainMenu').fadeOut('fast', function() {
+            $('#catalogSection').fadeIn('fast').css('display', 'flex');
+            
             if (currentService === 'bebidas') {
-                $('#catalogSection').fadeIn('fast').css('display', 'flex');
                 $('#stationView').hide();
-                $('#gameView').show();
+                $('#gameView').css('display', 'flex');
                 loadGames('bebidas');
             } else {
-                $('#stationView').fadeIn('fast').css('display', 'grid');
+                $('#stationView').css('display', 'block');
                 $('#gameView').hide();
                 generateStations(currentService);
             }
         });
     });
 
-    // 4. GENERAR 10 MÁQUINAS
+    // 4. GENERAR LAS 10 MÁQUINAS
     function generateStations(service) {
         let grid = $('#stationGrid');
         grid.empty();
@@ -65,10 +62,11 @@ $(document).ready(function() {
             `);
         }
 
+        // Clic en una máquina libre
         $('.station-card.available').click(function() {
             currentStation = $(this).data('station');
             $('#stationView').fadeOut('fast', function() {
-                $('#gameView').fadeIn('fast');
+                $('#gameView').css('display', 'flex').hide().fadeIn('fast');
                 loadGames(service);
             });
         });
@@ -97,20 +95,20 @@ $(document).ready(function() {
         }
     }
 
-    // Botón Volver
+    // VOLVER ATRÁS
     $('#btnBack').click(function() {
         if (currentService === 'bebidas') {
             $('#catalogSection').fadeOut('fast', () => $('#mainMenu').fadeIn('fast').css('display', 'flex'));
         } else {
             if ($('#gameView').is(':visible')) {
-                $('#gameView').fadeOut('fast', () => $('#stationView').fadeIn('fast').css('display', 'grid'));
+                $('#gameView').fadeOut('fast', () => $('#stationView').fadeIn('fast').css('display', 'block'));
             } else {
                 $('#stationView').fadeOut('fast', () => $('#mainMenu').fadeIn('fast').css('display', 'flex'));
             }
         }
     });
 
-    // 6. RESERVAR (Modal de 5 min)
+    // 6. RESERVAR (Con temporizador)
     $('#btnReservar').click(function() {
         $('#modalActionType').text('Reserva');
         $('#modalConsoleName').text(currentStation + ' - ' + currentService.toUpperCase());
@@ -118,8 +116,7 @@ $(document).ready(function() {
         calcularTotalReserva();
         $('#timerContainer').show();
 
-        let modalElement = document.getElementById('reservaModal');
-        modalInstance = new bootstrap.Modal(modalElement);
+        modalInstance = new bootstrap.Modal(document.getElementById('reservaModal'));
         modalInstance.show();
 
         let timeLeft = 300;
@@ -127,8 +124,7 @@ $(document).ready(function() {
         clearInterval(timerInterval);
         timerInterval = setInterval(function() {
             timeLeft--;
-            let m = Math.floor(timeLeft / 60);
-            let s = timeLeft % 60;
+            let m = Math.floor(timeLeft / 60), s = timeLeft % 60;
             $('#timerDisplay').text(`${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`);
             if (timeLeft <= 0) {
                 clearInterval(timerInterval);
@@ -145,7 +141,7 @@ $(document).ready(function() {
         $('#totalPay').text(hrs * currentPricePerHour);
     }
 
-    // 7. EMPEZAR AHORA
+    // 7. EMPEZAR AHORA (Sin temporizador de reserva)
     $('#btnEmpezar').click(function() {
         $('#modalActionType').text('Empezar');
         $('#modalConsoleName').text(currentStation + ' - ' + currentService.toUpperCase());
@@ -153,12 +149,11 @@ $(document).ready(function() {
         calcularTotalReserva();
         $('#timerContainer').hide(); 
 
-        let modalElement = document.getElementById('reservaModal');
-        modalInstance = new bootstrap.Modal(modalElement);
+        modalInstance = new bootstrap.Modal(document.getElementById('reservaModal'));
         modalInstance.show();
     });
 
-    // Confirmar Pago (Ambos)
+    // PROCESAR PAGO
     $('#btnConfirm').click(function() {
         clearInterval(timerInterval);
         if(modalInstance) modalInstance.hide();
@@ -168,19 +163,15 @@ $(document).ready(function() {
         let total = $('#totalPay').text();
 
         $('#toastAlert').slideDown('fast').delay(3000).fadeOut('fast');
-        
-        // Registrar en Bitácora
         addLog(action.toUpperCase(), `${currentStation} por ${hrs} hrs. Total: ${total} BOB`);
         
-        // Marcar ocupada
         $(`.station-card[data-station="${currentStation}"]`).removeClass('available').addClass('busy').find('span').text('Ocupada');
     });
 
-    // 8. BITÁCORA Y ENGRANAJE
+    // 8. BITÁCORA Y MENÚ ENGRANAJE
     function addLog(tipo, mensaje) {
         let hora = new Date().toLocaleTimeString();
-        let newLog = `<div><span class="text-warning">[${hora}]</span> <span class="text-info">${tipo}:</span> ${mensaje}</div>`;
-        $('#logOutput').append(newLog);
+        $('#logOutput').append(`<div><span class="text-warning">[${hora}]</span> <span class="text-info">${tipo}:</span> ${mensaje}</div>`);
         $('#logOutput').scrollTop($('#logOutput')[0].scrollHeight);
     }
 
@@ -188,13 +179,16 @@ $(document).ready(function() {
         e.stopPropagation();
         $('#settingsMenu').slideToggle('fast');
     });
-    
-    // Abrir Modal de Bitácora desde el menú
+
+    // ABRIR BITÁCORA (CORREGIDO CON RETARDO PARA QUE NO FALLE)
     $('#menuBitacora').click(function(e) {
         e.preventDefault();
         $('#settingsMenu').slideUp('fast'); // Cierra el menú
-        let bitacoraModal = new bootstrap.Modal(document.getElementById('bitacoraModal'));
-        bitacoraModal.show();
+        
+        setTimeout(function() {
+            let bitacoraModal = new bootstrap.Modal(document.getElementById('bitacoraModal'));
+            bitacoraModal.show();
+        }, 300); // Pequeño retardo para que el menú se cierre bien
     });
 
     $(document).click(function(e) {
@@ -203,7 +197,7 @@ $(document).ready(function() {
         }
     });
 
-    // Buscador
+    // BUSCADOR
     $('#gameSearch').on('keyup', function() {
         let val = $(this).val().toLowerCase();
         $('#gameGrid .game-card').each(function() {
