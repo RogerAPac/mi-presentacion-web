@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Majora Games - Live Dashboard</title>
+    <title>Majora Games - Arcade Dashboard</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -13,153 +13,131 @@
 </head>
 <body>
 
-    <!-- Navbar Superior -->
-    <nav class="navbar navbar-expand-lg py-2">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#"><i class="fas fa-gamepad me-2"></i>Majora Games</a>
-            <div class="d-flex align-items-center">
-                <span class="badge bg-dark border border-success text-success me-3"><i class="fas fa-circle text-danger me-1" style="font-size: 10px;"></i> Live Stream Activo</span>
-                <span class="text-white fw-bold"><i class="fas fa-user-circle me-1"></i> Invitado</span>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Dashboard Principal -->
-    <div class="dashboard-container">
+    <!-- Contenedor Principal (Layout Vertical) -->
+    <div class="app-container">
         
-        <!-- PANEL IZQUIERDO: Catálogo y Filtros -->
-        <div class="panel-left">
-            <div class="console-tabs mb-3">
-                <button class="btn btn-console active" data-target="pc"><i class="fas fa-desktop"></i> PC</button>
-                <button class="btn btn-console" data-target="ps5"><i class="fab fa-playstation"></i> PS5</button>
-                <button class="btn btn-console" data-target="xbox"><i class="fab fa-xbox"></i> Xbox 360</button>
-                <button class="btn btn-console" data-target="bebidas"><i class="fas fa-glass-martini-alt"></i> Bebidas</button>
-            </div>
-
-            <div class="catalog-container" id="catalog">
-                <!-- PC -->
-                <div class="console-content active" id="content-pc">
-                    <input type="text" class="form-control form-control-sm search-game mb-2" placeholder="Buscar juego de PC..." data-console="pc">
-                    <div class="game-grid">
-                        <div class="game-card" data-name="league of legends"><i class="fas fa-gamepad fa-2x text-primary mb-2"></i><span>League of Legends</span></div>
-                        <div class="game-card" data-name="valorant"><i class="fas fa-crosshairs fa-2x text-danger mb-2"></i><span>Valorant</span></div>
-                        <div class="game-card" data-name="gta v"><i class="fas fa-car fa-2x text-warning mb-2"></i><span>GTA V</span></div>
-                        <div class="game-card" data-name="minecraft"><i class="fas fa-cube fa-2x text-success mb-2"></i><span>Minecraft</span></div>
-                    </div>
-                </div>
-                <!-- PS5 -->
-                <div class="console-content" id="content-ps5">
-                    <input type="text" class="form-control form-control-sm search-game mb-2" placeholder="Buscar juego de PS5..." data-console="ps5">
-                    <div class="game-grid">
-                        <div class="game-card" data-name="fifa 24"><i class="fas fa-futbol fa-2x text-info mb-2"></i><span>EA FC 24</span></div>
-                        <div class="game-card" data-name="spiderman 2"><i class="fas fa-spider fa-2x text-danger mb-2"></i><span>Spider-Man 2</span></div>
-                        <div class="game-card" data-name="god of war"><i class="fas fa-axe fa-2x text-secondary mb-2"></i><span>God of War</span></div>
-                    </div>
-                </div>
-                <!-- XBOX -->
-                <div class="console-content" id="content-xbox">
-                    <input type="text" class="form-control form-control-sm search-game mb-2" placeholder="Buscar juego de Xbox..." data-console="xbox">
-                    <div class="game-grid">
-                        <div class="game-card" data-name="halo 3"><i class="fas fa-rocket fa-2x text-success mb-2"></i><span>Halo 3</span></div>
-                        <div class="game-card" data-name="gears of war"><i class="fas fa-skull fa-2x text-danger mb-2"></i><span>Gears of War</span></div>
-                        <div class="game-card" data-name="pes 2013"><i class="fas fa-futbol fa-2x text-warning mb-2"></i><span>PES 2013</span></div>
-                    </div>
-                </div>
-                <!-- BEBIDAS -->
-                <div class="console-content" id="content-bebidas">
-                    <div class="game-grid">
-                        <div class="game-card drink-card" data-name="coca cola" data-price="5"><i class="fas fa-glass-whiskey fa-2x text-danger mb-2"></i><span>Coca Cola</span><small>5 Bs</small></div>
-                        <div class="game-card drink-card" data-name="pepsi" data-price="5"><i class="fas fa-glass-whiskey fa-2x text-primary mb-2"></i><span>Pepsi</span><small>5 Bs</small></div>
-                        <div class="game-card drink-card" data-name="papas fritas" data-price="8"><i class="fas fa-cookie fa-2x text-warning mb-2"></i><span>Papas Lays</span><small>8 Bs</small></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- PANEL CENTRAL: La Bitácora -->
-        <div class="panel-center">
-            <div class="stream-header">
-                <h6 class="m-0 text-danger"><i class="fas fa-circle"></i> TikTok Live Shopping</h6>
-            </div>
+        <!-- ZONA SUPERIOR: Menú y Reloj -->
+        <div class="top-section">
             
-            <div id="liveContainer" class="live-box">
-                <p class="text-muted small mb-2">Haz clic o doble clic:</p>
-                <button type="button" class="btn btn-sm btn-outline-danger btn-offer" data-prod="Combo Refresco + Snack">Oferta Relámpago</button>
-                <button type="button" class="btn btn-sm btn-outline-warning btn-like" data-action="like"><i class="fas fa-heart"></i> Enviar Like (Doble Clic)</button>
-            </div>
-
-            <input type="text" id="chatInput" class="form-control form-control-sm mt-2" placeholder="Escribe en el chat...">
-            
-            <form id="liveForm" class="mt-2 p-2 border border-secondary rounded">
-                <select id="variantSelect" class="form-select form-select-sm mb-1">
-                    <option value="Vainilla">Vainilla</option>
-                    <option value="Chocolate">Chocolate</option>
-                    <option value="Fresa">Fresa</option>
-                </select>
-                <input type="text" id="userTikTok" class="form-control form-control-sm mb-1" placeholder="Tu usuario de TikTok" required>
-                <button type="submit" class="btn btn-sm btn-success w-100">Comprar en Vivo</button>
-            </form>
-
-            <div class="log-console mt-2" id="logOutput">
-                <div class="text-muted">[Sistema] Esperando interacciones...</div>
-            </div>
-        </div>
-
-        <!-- PANEL DERECHO: Calculadora y Reserva -->
-        <div class="panel-right">
-            <div class="checkout-box">
-                <h5 class="text-success mb-3"><i class="fas fa-shopping-cart"></i> Tu Reserva</h5>
+            <!-- PANEL IZQUIERDO: Los Botones Gigantes -->
+            <div class="main-menu" id="mainMenu">
+                <h2 class="menu-title">Selecciona tu Estación</h2>
                 
-                <div class="mb-3">
-                    <label class="form-label small text-muted">Servicio</label>
-                    <input type="text" id="selected-console-text" class="form-control form-control-sm bg-dark text-success border-success" value="PC Gamer" readonly>
+                <div class="giant-buttons-grid">
+                    <!-- Botón PC -->
+                    <button class="giant-btn" data-target="pc">
+                        <i class="fas fa-desktop"></i>
+                        <span>PC Gamer</span>
+                        <small>15 Bs / Hora</small>
+                    </button>
+
+                    <!-- Botón PS5 -->
+                    <button class="giant-btn" data-target="ps5">
+                        <i class="fab fa-playstation"></i>
+                        <span>PlayStation 5</span>
+                        <small>12 Bs / Hora</small>
+                    </button>
+
+                    <!-- Botón Xbox -->
+                    <button class="giant-btn" data-target="xbox">
+                        <i class="fab fa-xbox"></i>
+                        <span>Xbox 360</span>
+                        <small>8 Bs / Hora</small>
+                    </button>
+
+                    <!-- Botón Bebidas -->
+                    <button class="giant-btn btn-drink" data-target="bebidas">
+                        <i class="fas fa-glass-martini-alt"></i>
+                        <span>Bebidas</span>
+                        <small>Snacks y Refrescos</small>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ZONA DE CATÁLOGO (Oculta al inicio) -->
+            <div class="catalog-section" id="catalogSection">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <button class="btn btn-outline-success btn-sm" id="btnBack"><i class="fas fa-arrow-left"></i> Volver</button>
+                    <h4 id="catalogTitle" class="m-0 text-success fw-bold">Juegos</h4>
                 </div>
 
-                <div class="mb-3">
-                    <label class="form-label small text-muted">Horas a Jugar</label>
-                    <input type="number" id="hrs" class="form-control form-control-sm bg-dark text-white border-secondary" Value="1" min="1">
+                <!-- Buscador -->
+                <input type="text" id="gameSearch" class="form-control mb-3 bg-dark text-white border-success" placeholder="Buscar juego en esta estación...">
+
+                <!-- Contenedor de Juegos (Se llena con JS) -->
+                <div class="game-grid" id="gameGrid">
+                    <!-- Aquí se inyectan los juegos dinámicamente -->
+                </div>
+            </div>
+
+            <!-- PANEL LATERAL DERECHO (Logo, Reloj, Bitácora) -->
+            <div class="side-panel">
+                <div class="brand-box">
+                    <h1>MAJORA<br>GAMES</h1>
                 </div>
 
-                <div class="total-box">
-                    <h6 class="m-0">Total a Pagar:</h6>
-                    <h3 class="m-0 text-success"><span id="total">15</span> BOB</h3>
+                <div class="clock-box">
+                    <h3 id="liveClock">00:00:00</h3>
+                    <small>HORA LOCAL</small>
                 </div>
 
-                <button id="btnModal" class="btn btn-success w-100 mt-3 fw-bold py-2">
-                    Confirmar Reserva
-                </button>
+                <div class="bitacora-box">
+                    <h6><i class="fas fa-list-alt"></i> Bitácora (Admin)</h6>
+                    <div class="log-console" id="logOutput">
+                        <div class="text-muted">[SISTEMA] Esperando transacciones...</div>
+                    </div>
+                </div>
             </div>
         </div>
+
+        <!-- FOOTER (Línea blanca de tu dibujo) -->
+        <footer class="app-footer">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+            </div>
+            <p class="m-0 text-muted" style="font-size: 11px;">2026 Majora Games - Diseño Web II</p>
+        </footer>
     </div>
 
-    <!-- Toast Alert -->
-    <div id="toastAlert" class="custom-toast">
-        <i class="fas fa-check-circle text-success me-2"></i> ¡Reserva procesada con éxito!
-    </div>
-
-    <!-- Modal de Bootstrap -->
-    <div class="modal fade" id="confirmModal" tabindex="-1" aria-hidden="true">
+    <!-- MODAL DE RESERVA -->
+    <div class="modal fade" id="reservaModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content bg-dark border-success text-white">
                 <div class="modal-header border-bottom border-secondary">
-                    <h5 class="modal-title text-success">Confirmar Transacción</h5>
+                    <h5 class="modal-title text-success">Confirmar Reserva</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center">
-                    <p class="mb-1">Estás reservando:</p>
-                    <h4 id="modal-console" class="text-warning">PC Gamer</h4>
-                    <p class="mb-3">Horas: <span id="modal-hrs">1</span> | Total: <strong><span id="modal-total">15</span> BOB</strong></p>
+                    <h4 id="modalConsoleName" class="text-warning mb-3">Consola</h4>
                     
-                    <div class="alert alert-danger m-0 py-1">
-                        <small>Tiempo restante: <strong id="timer">05:00</strong></small>
+                    <div class="mb-3">
+                        <label class="form-label">Horas a Jugar</label>
+                        <input type="number" id="hrsInput" class="form-control bg-dark text-white border-secondary text-center" Value="1" min="1">
+                    </div>
+
+                    <div class="total-box mb-3">
+                        <h6 class="m-0">Total a Pagar:</h6>
+                        <h3 class="m-0 text-success"><span id="totalPay">15</span> BOB</h3>
+                    </div>
+
+                    <div class="alert alert-danger m-0 py-2">
+                        <small>Tiempo para confirmar: <strong id="timerDisplay">05:00</strong></small>
                     </div>
                 </div>
                 <div class="modal-footer border-top border-secondary">
                     <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal" id="btnCancel">Cancelar</button>
-                    <button type="button" class="btn btn-success btn-sm" id="btnConfirmPayment">Procesar Pago</button>
+                    <button type="button" class="btn btn-success btn-sm" id="btnConfirm">Pagar y Reservar</button>
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- Toast Alert (Reto PRO) -->
+    <div id="toastAlert" class="custom-toast">
+        <i class="fas fa-check-circle text-success me-2"></i> ¡Reserva procesada con éxito!
     </div>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
