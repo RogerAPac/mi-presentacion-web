@@ -5,11 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Majora Games - Live Dashboard</title>
     
-    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="styles.css">
@@ -27,13 +24,11 @@
         </div>
     </nav>
 
-    <!-- Dashboard Principal (Sin Scroll) -->
+    <!-- Dashboard Principal -->
     <div class="dashboard-container">
         
         <!-- PANEL IZQUIERDO: Catálogo y Filtros -->
         <div class="panel-left">
-            
-            <!-- Selector Principal -->
             <div class="console-tabs mb-3">
                 <button class="btn btn-console active" data-target="pc"><i class="fas fa-desktop"></i> PC</button>
                 <button class="btn btn-console" data-target="ps5"><i class="fab fa-playstation"></i> PS5</button>
@@ -41,49 +36,36 @@
                 <button class="btn btn-console" data-target="bebidas"><i class="fas fa-glass-martini-alt"></i> Bebidas</button>
             </div>
 
-            <!-- Contenedor de Catálogo Dinámico -->
             <div class="catalog-container" id="catalog">
-                
-                <!-- CONTENIDO PC -->
+                <!-- PC -->
                 <div class="console-content active" id="content-pc">
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                        <input type="text" class="form-control form-control-sm search-game" placeholder="Buscar juego de PC..." data-console="pc">
-                    </div>
+                    <input type="text" class="form-control form-control-sm search-game mb-2" placeholder="Buscar juego de PC..." data-console="pc">
                     <div class="game-grid">
-                        <div class="game-card" data-name="league of legends"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/League_of_Legends_2019_vector.svg/200px-League_of_Legends_2019_vector.svg.png" alt="LOL"><span>League of Legends</span></div>
-                        <div class="game-card" data-name="valorant"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Valorant_logo_-_pink_color_version.svg/200px-Valorant_logo_-_pink_color_version.svg.png" alt="Valorant"><span>Valorant</span></div>
-                        <div class="game-card" data-name="gta v"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/GTA_V_Logo.svg/200px-GTA_V_Logo.svg.png" alt="GTA V"><span>GTA V</span></div>
-                        <div class="game-card" data-name="minecraft"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Minecraft_logo.svg/200px-Minecraft_logo.svg.png" alt="Minecraft"><span>Minecraft</span></div>
-                        <div class="game-card" data-name="cs2"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Counter-Strike_2_logo.svg/200px-Counter-Strike_2_logo.svg.png" alt="CS2"><span>Counter-Strike 2</span></div>
-                        <div class="game-card" data-name="fortnite"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/FortniteLogo.svg/200px-FortniteLogo.svg.png" alt="Fortnite"><span>Fortnite</span></div>
+                        <div class="game-card" data-name="league of legends"><i class="fas fa-gamepad fa-2x text-primary mb-2"></i><span>League of Legends</span></div>
+                        <div class="game-card" data-name="valorant"><i class="fas fa-crosshairs fa-2x text-danger mb-2"></i><span>Valorant</span></div>
+                        <div class="game-card" data-name="gta v"><i class="fas fa-car fa-2x text-warning mb-2"></i><span>GTA V</span></div>
+                        <div class="game-card" data-name="minecraft"><i class="fas fa-cube fa-2x text-success mb-2"></i><span>Minecraft</span></div>
                     </div>
                 </div>
-
-                <!-- CONTENIDO PS5 -->
+                <!-- PS5 -->
                 <div class="console-content" id="content-ps5">
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                        <input type="text" class="form-control form-control-sm search-game" placeholder="Buscar juego de PS5..." data-console="ps5">
-                    </div>
+                    <input type="text" class="form-control form-control-sm search-game mb-2" placeholder="Buscar juego de PS5..." data-console="ps5">
                     <div class="game-grid">
-                        <div class="game-card" data-name="fifa 24"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/EA_Sports_FC_24_Cover.jpg/200px-EA_Sports_FC_24_Cover.jpg" alt="FC24"><span>EA FC 24</span></div>
-                        <div class="game-card" data-name="spiderman 2"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Marvel%27s_Spider-Man_2_logo.png/200px-Marvel%27s_Spider-Man_2_logo.png" alt="Spiderman"><span>Spider-Man 2</span></div>
-                        <div class="game-card" data-name="god of war"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/God_of_War_Ragnar%C3%B6k_logo.svg/200px-God_of_War_Ragnar%C3%B6k_logo.svg.png" alt="GOW"><span>God of War</span></div>
+                        <div class="game-card" data-name="fifa 24"><i class="fas fa-futbol fa-2x text-info mb-2"></i><span>EA FC 24</span></div>
+                        <div class="game-card" data-name="spiderman 2"><i class="fas fa-spider fa-2x text-danger mb-2"></i><span>Spider-Man 2</span></div>
+                        <div class="game-card" data-name="god of war"><i class="fas fa-axe fa-2x text-secondary mb-2"></i><span>God of War</span></div>
                     </div>
                 </div>
-
-                <!-- CONTENIDO XBOX 360 -->
+                <!-- XBOX -->
                 <div class="console-content" id="content-xbox">
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                        <input type="text" class="form-control form-control-sm search-game" placeholder="Buscar juego de Xbox..." data-console="xbox">
-                    </div>
+                    <input type="text" class="form-control form-control-sm search-game mb-2" placeholder="Buscar juego de Xbox..." data-console="xbox">
                     <div class="game-grid">
-                        <div class="game-card" data-name="halo 3"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Halo_3_Logo.png/200px-Halo_3_Logo.png" alt="Halo 3"><span>Halo 3</span></div>
-                        <div class="game-card" data-name="gears of war"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Gears_of_War_logo.png/200px-Gears_of_War_logo.png" alt="Gears"><span>Gears of War</span></div>
-                        <div class="game-card" data-name="pes 2013"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Pro_Evolution_Soccer_logo.svg/200px-Pro_Evolution_Soccer_logo.svg.png" alt="PES"><span>PES 2013</span></div>
+                        <div class="game-card" data-name="halo 3"><i class="fas fa-rocket fa-2x text-success mb-2"></i><span>Halo 3</span></div>
+                        <div class="game-card" data-name="gears of war"><i class="fas fa-skull fa-2x text-danger mb-2"></i><span>Gears of War</span></div>
+                        <div class="game-card" data-name="pes 2013"><i class="fas fa-futbol fa-2x text-warning mb-2"></i><span>PES 2013</span></div>
                     </div>
                 </div>
-
-                <!-- CONTENIDO BEBIDAS -->
+                <!-- BEBIDAS -->
                 <div class="console-content" id="content-bebidas">
                     <div class="game-grid">
                         <div class="game-card drink-card" data-name="coca cola" data-price="5"><i class="fas fa-glass-whiskey fa-2x text-danger mb-2"></i><span>Coca Cola</span><small>5 Bs</small></div>
@@ -91,27 +73,23 @@
                         <div class="game-card drink-card" data-name="papas fritas" data-price="8"><i class="fas fa-cookie fa-2x text-warning mb-2"></i><span>Papas Lays</span><small>8 Bs</small></div>
                     </div>
                 </div>
-
             </div>
         </div>
 
-        <!-- PANEL CENTRAL: La Bitácora (TikTok Live Style) -->
+        <!-- PANEL CENTRAL: La Bitácora -->
         <div class="panel-center">
             <div class="stream-header">
-                <h6 class="m-0 text-danger"><i class="fas fa-circle"></i> TikTok Live Shopping - Majora Games</h6>
+                <h6 class="m-0 text-danger"><i class="fas fa-circle"></i> TikTok Live Shopping</h6>
             </div>
             
-            <!-- Zona de Interacción Live (Delegación de Eventos) -->
             <div id="liveContainer" class="live-box">
-                <p class="text-muted small mb-2">Haz clic o doble clic para interactuar:</p>
-                <button class="btn btn-sm btn-outline-danger btn-offer" data-prod="Combo Refresco + Snack">Oferta Relámpago</button>
-                <button class="btn btn-sm btn-outline-warning btn-like" data-action="like"><i class="fas fa-heart"></i> Enviar Like (Doble Clic)</button>
+                <p class="text-muted small mb-2">Haz clic o doble clic:</p>
+                <button type="button" class="btn btn-sm btn-outline-danger btn-offer" data-prod="Combo Refresco + Snack">Oferta Relámpago</button>
+                <button type="button" class="btn btn-sm btn-outline-warning btn-like" data-action="like"><i class="fas fa-heart"></i> Enviar Like (Doble Clic)</button>
             </div>
 
-            <!-- Chat del Live -->
-            <input type="text" id="chatInput" class="form-control form-control-sm mt-2" placeholder="Escribe en el chat del Live...">
+            <input type="text" id="chatInput" class="form-control form-control-sm mt-2" placeholder="Escribe en el chat...">
             
-            <!-- Formulario Rápido (Día 2) -->
             <form id="liveForm" class="mt-2 p-2 border border-secondary rounded">
                 <select id="variantSelect" class="form-select form-select-sm mb-1">
                     <option value="Vainilla">Vainilla</option>
@@ -122,7 +100,6 @@
                 <button type="submit" class="btn btn-sm btn-success w-100">Comprar en Vivo</button>
             </form>
 
-            <!-- Consola de Bitácora -->
             <div class="log-console mt-2" id="logOutput">
                 <div class="text-muted">[Sistema] Esperando interacciones...</div>
             </div>
@@ -134,7 +111,7 @@
                 <h5 class="text-success mb-3"><i class="fas fa-shopping-cart"></i> Tu Reserva</h5>
                 
                 <div class="mb-3">
-                    <label class="form-label small text-muted">Consola Seleccionada</label>
+                    <label class="form-label small text-muted">Servicio</label>
                     <input type="text" id="selected-console-text" class="form-control form-control-sm bg-dark text-success border-success" value="PC Gamer" readonly>
                 </div>
 
@@ -148,24 +125,24 @@
                     <h3 class="m-0 text-success"><span id="total">15</span> BOB</h3>
                 </div>
 
-                <button id="btnModal" class="btn btn-success w-100 mt-3 fw-bold py-2" style="box-shadow: 0 0 10px rgba(57,255,20,0.4);">
+                <button id="btnModal" class="btn btn-success w-100 mt-3 fw-bold py-2">
                     Confirmar Reserva
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- Toast Alert (Reto UI) -->
+    <!-- Toast Alert -->
     <div id="toastAlert" class="custom-toast">
         <i class="fas fa-check-circle text-success me-2"></i> ¡Reserva procesada con éxito!
     </div>
 
-    <!-- Modal de Bootstrap (Temporizador) -->
+    <!-- Modal de Bootstrap -->
     <div class="modal fade" id="confirmModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content bg-dark border-success text-white">
                 <div class="modal-header border-bottom border-secondary">
-                    <h5 class="modal-title text-success"><i class="fas fa-check-double"></i> Confirmar Transacción</h5>
+                    <h5 class="modal-title text-success">Confirmar Transacción</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center">
@@ -174,7 +151,7 @@
                     <p class="mb-3">Horas: <span id="modal-hrs">1</span> | Total: <strong><span id="modal-total">15</span> BOB</strong></p>
                     
                     <div class="alert alert-danger m-0 py-1">
-                        <small>Tiempo restante para confirmar: <strong id="timer">05:00</strong></small>
+                        <small>Tiempo restante: <strong id="timer">05:00</strong></small>
                     </div>
                 </div>
                 <div class="modal-footer border-top border-secondary">
@@ -185,7 +162,6 @@
         </div>
     </div>
 
-    <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
