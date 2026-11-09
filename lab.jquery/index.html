@@ -16,36 +16,31 @@
     <!-- Contenedor Principal -->
     <div class="app-container">
         
-        <!-- ZONA SUPERIOR: Menú y Reloj -->
         <div class="top-section">
             
-            <!-- PANEL IZQUIERDO: Los Botones Gigantes -->
+            <!-- PANEL IZQUIERDO: Menús y Catálogo -->
             <div class="main-menu" id="mainMenu">
                 <h2 class="menu-title">Selecciona tu Estación</h2>
                 
                 <div class="giant-buttons-grid">
-                    <!-- Botón PC -->
                     <button class="giant-btn bg-pc" data-target="pc">
                         <i class="fas fa-desktop"></i>
                         <span>PC Gamer</span>
                         <small>15 Bs / Hora</small>
                     </button>
 
-                    <!-- Botón PS5 -->
                     <button class="giant-btn bg-ps5" data-target="ps5">
                         <i class="fab fa-playstation"></i>
                         <span>PlayStation 5</span>
                         <small>12 Bs / Hora</small>
                     </button>
 
-                    <!-- Botón Xbox -->
                     <button class="giant-btn bg-xbox" data-target="xbox">
                         <i class="fab fa-xbox"></i>
                         <span>Xbox 360</span>
                         <small>8 Bs / Hora</small>
                     </button>
 
-                    <!-- Botón Bebidas -->
                     <button class="giant-btn bg-drink" data-target="bebidas">
                         <i class="fas fa-glass-martini-alt"></i>
                         <span>Bebidas</span>
@@ -54,7 +49,7 @@
                 </div>
             </div>
 
-                       <!-- ZONA DE CATÁLOGO -->
+            <!-- ZONA DE CATÁLOGO -->
             <div class="catalog-section" id="catalogSection">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <button class="btn btn-outline-success btn-sm" id="btnBack"><i class="fas fa-arrow-left"></i> Volver</button>
@@ -92,8 +87,6 @@
 
             <!-- PANEL LATERAL DERECHO -->
             <div class="side-panel">
-                
-                <!-- Logo y Engranaje -->
                 <div class="brand-box position-relative">
                     <h1>MAJORA<br>GAMES</h1>
                     <button class="btn-gear" id="btnSettings"><i class="fas fa-cog"></i></button>
@@ -102,26 +95,20 @@
                 <!-- Menú Desplegable del Engranaje -->
                 <div class="settings-menu" id="settingsMenu">
                     <ul>
+                        <li><a href="#" id="menuBitacora"><i class="fas fa-list-alt me-2"></i> Ver Bitácora</a></li>
                         <li><a href="#"><i class="fas fa-user-shield me-2"></i> Perfil Admin</a></li>
                         <li><a href="#"><i class="fas fa-tags me-2"></i> Editar Precios</a></li>
-                        <li><a href="#"><i class="fas fa-tools me-2"></i> Mantenimiento</a></li>
                         <li><a href="#" class="text-danger"><i class="fas fa-power-off me-2"></i> Cerrar Sistema</a></li>
                     </ul>
                 </div>
 
-                <!-- Reloj -->
                 <div class="clock-box">
                     <h3 id="liveClock">00:00:00</h3>
                     <small>HORA LOCAL</small>
                 </div>
-
-                <!-- Bitácora -->
-                <div class="bitacora-box">
-                    <h6><i class="fas fa-list-alt"></i> Bitácora (Admin)</h6>
-                    <div class="log-console" id="logOutput">
-                        <div class="text-muted">[SISTEMA] Esperando transacciones...</div>
-                    </div>
-                </div>
+                
+                <!-- Espacio vacío para mantener el diseño -->
+                <div class="flex-grow-1"></div>
             </div>
         </div>
 
@@ -135,6 +122,23 @@
             </div>
             <p class="m-0 text-muted" style="font-size: 11px;">2026 Majora Games - Diseño Web II</p>
         </footer>
+    </div>
+
+    <!-- MODAL DE BITÁCORA (Se abre desde el engranaje) -->
+    <div class="modal fade" id="bitacoraModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content bg-dark border-success text-white">
+                <div class="modal-header border-bottom border-secondary">
+                    <h5 class="modal-title text-success"><i class="fas fa-list-alt me-2"></i> Bitácora de Transacciones</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="log-console" id="logOutput" style="height: 300px;">
+                        <div class="text-muted">[SISTEMA] Esperando transacciones...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- MODAL DE RESERVA -->
@@ -158,7 +162,7 @@
                         <h3 class="m-0 text-success"><span id="totalPay">15</span> BOB</h3>
                     </div>
 
-                    <!-- Contenedor del Temporizador (Se oculta si es "Empezar") -->
+                    <!-- Contenedor del Temporizador -->
                     <div class="alert alert-danger m-0 py-2" id="timerContainer">
                         <small>Tiempo para confirmar: <strong id="timerDisplay">05:00</strong></small>
                     </div>
@@ -173,7 +177,7 @@
 
     <!-- Toast Alert -->
     <div id="toastAlert" class="custom-toast">
-        <i class="fas fa-check-circle text-success me-2"></i> ¡Reserva procesada con éxito!
+        <i class="fas fa-check-circle text-success me-2"></i> ¡Transacción procesada!
     </div>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
