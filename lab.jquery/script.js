@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    // 1. RELOJ EN TIEMPO REAL
+    // 1. RELOJ
     function updateClock() {
         let now = new Date();
         $('#liveClock').text(now.toLocaleTimeString('es-ES'));
@@ -8,48 +8,24 @@ $(document).ready(function() {
     setInterval(updateClock, 1000);
     updateClock();
 
-    // 2. DATOS DEL CATÁLOGO
+    // 2. DATOS
     const catalogData = {
-        'pc': [
-            { name: 'League of Legends', icon: 'fa-gamepad' },
-            { name: 'Valorant', icon: 'fa-crosshairs' },
-            { name: 'GTA V', icon: 'fa-car' },
-            { name: 'Minecraft', icon: 'fa-cube' },
-            { name: 'CS2', icon: 'fa-gun' },
-            { name: 'Fortnite', icon: 'fa-parachute-box' }
-        ],
-        'ps5': [
-            { name: 'EA FC 24', icon: 'fa-futbol' },
-            { name: 'Spider-Man 2', icon: 'fa-spider' },
-            { name: 'God of War', icon: 'fa-axe' },
-            { name: 'Mortal Kombat 1', icon: 'fa-dragon' }
-        ],
-        'xbox': [
-            { name: 'Halo 3', icon: 'fa-rocket' },
-            { name: 'Gears of War', icon: 'fa-skull' },
-            { name: 'PES 2013', icon: 'fa-futbol' },
-            { name: 'GTA San Andreas', icon: 'fa-car' }
-        ],
-        'bebidas': [
-            { name: 'Coca Cola', icon: 'fa-glass-whiskey' },
-            { name: 'Pepsi', icon: 'fa-glass-whiskey' },
-            { name: 'Papas Lays', icon: 'fa-cookie' },
-            { name: 'Chocolate', icon: 'fa-candy-cane' }
-        ]
+        'pc': [{ name: 'League of Legends', icon: 'fa-gamepad' }, { name: 'Valorant', icon: 'fa-crosshairs' }, { name: 'GTA V', icon: 'fa-car' }, { name: 'Minecraft', icon: 'fa-cube' }, { name: 'CS2', icon: 'fa-gun' }, { name: 'Fortnite', icon: 'fa-parachute-box' }],
+        'ps5': [{ name: 'EA FC 24', icon: 'fa-futbol' }, { name: 'Spider-Man 2', icon: 'fa-spider' }, { name: 'God of War', icon: 'fa-axe' }, { name: 'Mortal Kombat 1', icon: 'fa-dragon' }],
+        'xbox': [{ name: 'Halo 3', icon: 'fa-rocket' }, { name: 'Gears of War', icon: 'fa-skull' }, { name: 'PES 2013', icon: 'fa-futbol' }, { name: 'GTA San Andreas', icon: 'fa-car' }],
+        'bebidas': [{ name: 'Coca Cola', icon: 'fa-glass-whiskey' }, { name: 'Pepsi', icon: 'fa-glass-whiskey' }, { name: 'Papas Lays', icon: 'fa-cookie' }, { name: 'Chocolate', icon: 'fa-candy-cane' }]
     };
 
     let currentService = '';
     let currentPricePerHour = 0;
     let currentStation = '';
     let timerInterval;
-    let playInterval; // Para el cronómetro de "Empezar"
     let modalInstance = null;
 
-    // 3. SELECCIÓN DE MENÚ (Muestra las 10 máquinas)
+    // 3. SELECCIÓN DE MENÚ
     $('.giant-btn').click(function() {
         currentService = $(this).data('target');
         
-        // Precios
         if (currentService === 'pc') currentPricePerHour = 15;
         if (currentService === 'ps5') currentPricePerHour = 12;
         if (currentService === 'xbox') currentPricePerHour = 8;
@@ -57,13 +33,11 @@ $(document).ready(function() {
 
         $('#mainMenu').fadeOut('fast', function() {
             if (currentService === 'bebidas') {
-                // Bebidas no tiene máquinas, va directo al catálogo
                 $('#catalogSection').fadeIn('fast').css('display', 'flex');
                 $('#stationView').hide();
                 $('#gameView').show();
                 loadGames('bebidas');
             } else {
-                // Consolas muestran las máquinas primero
                 $('#stationView').fadeIn('fast').css('display', 'grid');
                 $('#gameView').hide();
                 generateStations(currentService);
@@ -71,28 +45,26 @@ $(document).ready(function() {
         });
     });
 
-    // 4. GENERAR LAS 10 MÁQUINAS (Algunas ocupadas aleatoriamente)
+    // 4. GENERAR 10 MÁQUINAS
     function generateStations(service) {
         let grid = $('#stationGrid');
         grid.empty();
         let prefix = service.toUpperCase();
         
         for (let i = 1; i <= 10; i++) {
-            let isBusy = Math.random() < 0.3; // 30% de probabilidad de estar ocupada
+            let isBusy = Math.random() < 0.3; 
             let statusClass = isBusy ? 'busy' : 'available';
             let statusText = isBusy ? 'Ocupada' : 'Libre';
             
-            let card = `
+            grid.append(`
                 <div class="station-card ${statusClass}" data-station="${prefix}-${i}">
                     <i class="fas fa-desktop"></i>
                     <h4>${prefix}-${i}</h4>
                     <span>${statusText}</span>
                 </div>
-            `;
-            grid.append(card);
+            `);
         }
 
-        // Evento clic en una máquina
         $('.station-card.available').click(function() {
             currentStation = $(this).data('station');
             $('#stationView').fadeOut('fast', function() {
@@ -102,7 +74,7 @@ $(document).ready(function() {
         });
     }
 
-    // 5. CARGAR JUEGOS Y BOTONES DE ACCIÓN
+    // 5. CARGAR JUEGOS
     function loadGames(service) {
         let grid = $('#gameGrid');
         grid.empty();
@@ -116,7 +88,6 @@ $(document).ready(function() {
             `);
         });
 
-        // Mostrar panel de acciones si no es bebida
         if (service !== 'bebidas') {
             $('#actionPanel').show();
             $('#currentStationName').text(currentStation);
@@ -139,12 +110,13 @@ $(document).ready(function() {
         }
     });
 
-    // 6. LÓGICA DE RESERVAR (Modal de 5 min)
+    // 6. RESERVAR (Modal de 5 min)
     $('#btnReservar').click(function() {
         $('#modalActionType').text('Reserva');
         $('#modalConsoleName').text(currentStation + ' - ' + currentService.toUpperCase());
         $('#hrsInput').val(1);
         calcularTotalReserva();
+        $('#timerContainer').show();
 
         let modalElement = document.getElementById('reservaModal');
         modalInstance = new bootstrap.Modal(modalElement);
@@ -152,7 +124,6 @@ $(document).ready(function() {
 
         let timeLeft = 300;
         $('#timerDisplay').text('05:00');
-        
         clearInterval(timerInterval);
         timerInterval = setInterval(function() {
             timeLeft--;
@@ -174,14 +145,12 @@ $(document).ready(function() {
         $('#totalPay').text(hrs * currentPricePerHour);
     }
 
-    // 7. LÓGICA DE EMPEZAR AHORA (Modal sin temporizador de reserva)
+    // 7. EMPEZAR AHORA
     $('#btnEmpezar').click(function() {
         $('#modalActionType').text('Empezar');
         $('#modalConsoleName').text(currentStation + ' - ' + currentService.toUpperCase());
         $('#hrsInput').val(1);
         calcularTotalReserva();
-        
-        // Ocultar el temporizador de reserva para "Empezar"
         $('#timerContainer').hide(); 
 
         let modalElement = document.getElementById('reservaModal');
@@ -189,7 +158,7 @@ $(document).ready(function() {
         modalInstance.show();
     });
 
-    // Confirmar Pago (Funciona para Reservar y Empezar)
+    // Confirmar Pago (Ambos)
     $('#btnConfirm').click(function() {
         clearInterval(timerInterval);
         if(modalInstance) modalInstance.hide();
@@ -199,16 +168,19 @@ $(document).ready(function() {
         let total = $('#totalPay').text();
 
         $('#toastAlert').slideDown('fast').delay(3000).fadeOut('fast');
+        
+        // Registrar en Bitácora
         addLog(action.toUpperCase(), `${currentStation} por ${hrs} hrs. Total: ${total} BOB`);
         
-        // Marcar la máquina como ocupada visualmente (opcional)
+        // Marcar ocupada
         $(`.station-card[data-station="${currentStation}"]`).removeClass('available').addClass('busy').find('span').text('Ocupada');
     });
 
-    // 8. BITÁCORA Y MENÚS
+    // 8. BITÁCORA Y ENGRANAJE
     function addLog(tipo, mensaje) {
         let hora = new Date().toLocaleTimeString();
-        $('#logOutput').append(`<div><span class="text-warning">[${hora}]</span> <span class="text-info">${tipo}:</span> ${mensaje}</div>`);
+        let newLog = `<div><span class="text-warning">[${hora}]</span> <span class="text-info">${tipo}:</span> ${mensaje}</div>`;
+        $('#logOutput').append(newLog);
         $('#logOutput').scrollTop($('#logOutput')[0].scrollHeight);
     }
 
@@ -216,16 +188,26 @@ $(document).ready(function() {
         e.stopPropagation();
         $('#settingsMenu').slideToggle('fast');
     });
-    $(document).click(function(e) {
-        if (!$(e.target).closest('.brand-box').length) $('#settingsMenu').slideUp('fast');
+    
+    // Abrir Modal de Bitácora desde el menú
+    $('#menuBitacora').click(function(e) {
+        e.preventDefault();
+        $('#settingsMenu').slideUp('fast'); // Cierra el menú
+        let bitacoraModal = new bootstrap.Modal(document.getElementById('bitacoraModal'));
+        bitacoraModal.show();
     });
 
-    // Filtro Buscador
+    $(document).click(function(e) {
+        if (!$(e.target).closest('.brand-box').length && !$(e.target).closest('#settingsMenu').length) {
+            $('#settingsMenu').slideUp('fast');
+        }
+    });
+
+    // Buscador
     $('#gameSearch').on('keyup', function() {
         let val = $(this).val().toLowerCase();
         $('#gameGrid .game-card').each(function() {
             $(this).data('name').includes(val) ? $(this).show() : $(this).hide();
         });
     });
-
 });
