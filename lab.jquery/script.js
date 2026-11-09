@@ -185,5 +185,18 @@ $(document).ready(function() {
         $('#logOutput').append(log);
         $('#logOutput').scrollTop($('#logOutput')[0].scrollHeight);
     }
+    // ==========================================
+    // 6. MENÚ DE AJUSTES (ENGRANAJE)
+    // ==========================================
+    $('#btnSettings').click(function(e) {
+        e.stopPropagation(); // Evita que se cierre inmediatamente
+        $('#settingsMenu').slideToggle('fast');
+    });
 
+    // Cerrar el menú si se hace clic afuera
+    $(document).click(function(e) {
+        if (!$(e.target).closest('.brand-box').length) {
+            $('#settingsMenu').slideUp('fast');
+        }
+    });
 });
