@@ -337,3 +337,64 @@ body {
 .bg-ps5 { background-image: url('https://images.unsplash.com/photo-1606813907291-d86efa9b94db?auto=format&fit=crop&w=600&q=80'); }
 .bg-xbox { background-image: url('https://images.unsplash.com/photo-1621259182978-fbf93132d53d?auto=format&fit=crop&w=600&q=80'); }
 .bg-drink { background-image: url('https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=600&q=80'); }
+/* --- TARJETAS DE LAS 10 MÁQUINAS --- */
+#stationView {
+    width: 100%;
+    height: 100%;
+}
+
+.station-card {
+    background: #1a1a1a;
+    border: 2px solid #333;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.station-card i {
+    font-size: 30px;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.station-card h4 {
+    font-size: 16px;
+    margin: 0;
+    font-weight: 800;
+}
+
+.station-card span {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 5px;
+}
+
+/* Estilo si está libre */
+.station-card.available {
+    border-color: rgba(57, 255, 20, 0.4);
+}
+.station-card.available:hover {
+    border-color: var(--primary-green);
+    box-shadow: 0 0 15px rgba(57, 255, 20, 0.3);
+    transform: translateY(-3px);
+}
+.station-card.available i, .station-card.available span {
+    color: var(--primary-green);
+}
+
+/* Estilo si está ocupada */
+.station-card.busy {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: #111;
+}
+.station-card.busy i, .station-card.busy span {
+    color: #ff3333;
+}
