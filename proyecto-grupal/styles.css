@@ -1,0 +1,83 @@
+:root {
+    --bg-dark: #121212;
+    --primary-yellow: #f59e0b;
+    --card-bg: #1e1e1e;
+    --text-light: #e0e0e0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    scroll-behavior: smooth;
+}
+
+/* Navbar */
+.navbar {
+    background-color: rgba(18, 18, 18, 0.95);
+    border-bottom: 2px solid var(--primary-yellow);
+    backdrop-filter: blur(10px);
+}
+.navbar-brand { color: var(--primary-yellow) !important; font-weight: 800; font-size: 24px; }
+.nav-link { color: white !important; font-weight: 600; }
+.nav-link:hover { color: var(--primary-yellow) !important; }
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(rgba(18, 18, 18, 0.8), rgba(18, 18, 18, 0.8)), 
+                url('https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1920&q=80') center/cover;
+    padding: 150px 20px 100px 20px;
+}
+
+/* Tarjetas de Productos */
+.product-card { transition: transform 0.3s ease; }
+.product-card:hover { transform: translateY(-10px); }
+.card { border-radius: 15px; overflow: hidden; transition: box-shadow 0.3s; }
+.card:hover { box-shadow: 0 0 20px rgba(245, 158, 11, 0.3); }
+.card-img-top { height: 200px; object-fit: cover; }
+
+/* Validaciones del Formulario */
+.form-control:focus {
+    background-color: #121212 !important;
+    color: white !important;
+    border-color: var(--primary-yellow) !important;
+    box-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
+}
+.error-text {
+    color: #ff4444;
+    font-size: 12px;
+    display: none;
+    margin-top: 5px;
+}
+.is-invalid { border-color: #ff4444 !important; }
+.is-invalid + .error-text { display: block; }
+
+/* Footer */
+footer { background-color: #050505; border-top: 1px solid #222; }
+.social-links a {
+    color: white;
+    font-size: 24px;
+    margin: 0 15px;
+    transition: color 0.3s, transform 0.3s;
+    display: inline-block;
+}
+.social-links a:hover { color: var(--primary-yellow); transform: scale(1.2); }
+
+/* Carrito */
+#cartList .list-group-item { background-color: transparent !important; color: white; }
+
+/* Toast Alert */
+.custom-toast {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    background: var(--card-bg);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-yellow);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    display: none;
+    z-index: 9999;
+    font-weight: 600;
+}
