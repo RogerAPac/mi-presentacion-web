@@ -142,11 +142,11 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content bg-dark border-success text-white">
                 <div class="modal-header border-bottom border-secondary">
-                    <h5 class="modal-title text-success">Confirmar Reserva</h5>
+                    <h5 class="modal-title text-success"><span id="modalActionType">Acción</span> de Estación</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center">
-                    <h4 id="modalConsoleName" class="text-warning mb-3">Consola</h4>
+                    <h4 id="modalConsoleName" class="text-warning mb-3">Estación</h4>
                     
                     <div class="mb-3">
                         <label class="form-label">Horas a Jugar</label>
@@ -158,13 +158,14 @@
                         <h3 class="m-0 text-success"><span id="totalPay">15</span> BOB</h3>
                     </div>
 
-                    <div class="alert alert-danger m-0 py-2">
+                    <!-- Contenedor del Temporizador (Se oculta si es "Empezar") -->
+                    <div class="alert alert-danger m-0 py-2" id="timerContainer">
                         <small>Tiempo para confirmar: <strong id="timerDisplay">05:00</strong></small>
                     </div>
                 </div>
                 <div class="modal-footer border-top border-secondary">
                     <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal" id="btnCancel">Cancelar</button>
-                    <button type="button" class="btn btn-success btn-sm" id="btnConfirm">Pagar y Reservar</button>
+                    <button type="button" class="btn btn-success btn-sm" id="btnConfirm">Procesar Pago</button>
                 </div>
             </div>
         </div>
