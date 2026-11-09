@@ -255,3 +255,85 @@ body {
     z-index: 9999;
     font-weight: 600;
 }
+/* --- BOTÓN DE ENGRANAJE Y MENÚ DESPLEGABLE --- */
+.btn-gear {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    color: var(--primary-green);
+    font-size: 20px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+.btn-gear:hover {
+    transform: rotate(90deg);
+}
+
+.settings-menu {
+    position: absolute;
+    top: 170px; /* Ajusta según la altura de tu logo */
+    right: 15px;
+    background: var(--panel-bg);
+    border: 1px solid var(--primary-green);
+    border-radius: 8px;
+    width: 200px;
+    display: none; /* Oculto al inicio */
+    z-index: 100;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.8);
+}
+.settings-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.settings-menu ul li a {
+    display: block;
+    padding: 10px 15px;
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 13px;
+    border-bottom: 1px solid #333;
+    transition: 0.3s;
+}
+.settings-menu ul li:last-child a { border-bottom: none; }
+.settings-menu ul li a:hover {
+    background: #222;
+    color: var(--primary-green);
+    padding-left: 20px;
+}
+
+/* --- IMÁGENES DE FONDO EN LOS BOTONES GIGANTES --- */
+.giant-btn {
+    position: relative;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    border: 2px solid #333;
+}
+
+/* Capa oscura para que el texto sea legible sobre la imagen */
+.giant-btn::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.75); /* Oscurece la imagen al 75% */
+    z-index: 1;
+    transition: background 0.3s;
+}
+
+.giant-btn > * {
+    position: relative;
+    z-index: 2; /* Pone el texto por encima de la capa oscura */
+}
+
+.giant-btn:hover::before {
+    background: rgba(0, 0, 0, 0.5); /* Se aclara un poco al pasar el mouse */
+}
+
+/* Imágenes (Usando Unsplash de alta calidad) */
+.bg-pc { background-image: url('https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=600&q=80'); }
+.bg-ps5 { background-image: url('https://images.unsplash.com/photo-1606813907291-d86efa9b94db?auto=format&fit=crop&w=600&q=80'); }
+.bg-xbox { background-image: url('https://images.unsplash.com/photo-1621259182978-fbf93132d53d?auto=format&fit=crop&w=600&q=80'); }
+.bg-drink { background-image: url('https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=600&q=80'); }
