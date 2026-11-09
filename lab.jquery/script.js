@@ -1,46 +1,45 @@
 $(document).ready(function() {
 
-    // 1. HAMBURGUESA
-    window.toggleMenu = function(id) {
-        $('#' + id).slideToggle('fast');
-        $('#icon-' + id).toggleClass('open');
-    };
+    // ==========================================
+    // 1. LÓGICA DE NAVEGACIÓN Y CATÁLOGO
+    // ==========================================
+    let precios = { 'pc': 15, 'ps5': 12, 'xbox': 8 };
+    let consolaActual = 'pc';
 
-    // 2. ACORDEÓN DE SERVICIOS
-    $('.accordion-btn').click(function() {
-        $('.accordion-panel').not($(this).next()).slideUp('fast');
-        $(this).next('.accordion-panel').slideToggle('fast');
-    });
-
-    // 3. SELECTOR DINÁMICO (Fondos e íconos)
     $('.btn-console').click(function() {
+        let target = $(this).data('target');
+        consolaActual = target;
+
+        // Cambiar clases activas
         $('.btn-console').removeClass('active');
         $(this).addClass('active');
 
-        let target = $(this).data('target');
+        // Mostrar el contenido correcto
+        $('.console-content').removeClass('active');
+        $('#content-' + target).addClass('active');
 
-        $('.console-card').hide();
-        $('#card-' + target).fadeIn('slow');
-
-        $('body').removeClass('theme-pc theme-ps5 theme-xbox');
-        
-        if (target === 'pc') {
-            $('body').addClass('theme-pc');
-            $('#main-icon').html('<i class="fas fa-desktop"></i>');
-        } else if (target === 'ps5') {
-            $('body').addClass('theme-ps5');
-            $('#main-icon').html('<i class="fab fa-playstation"></i>');
-        } else if (target === 'xbox') {
-            $('body').addClass('theme-xbox');
-            $('#main-icon').html('<i class="fab fa-xbox"></i>');
+        // Actualizar el panel de reserva
+        if (target === 'bebidas') {
+            $('#selected-console-text').val('Bebidas / Snacks');
+            $('#hrs').prop('disabled', true).val(1);
+            $('#total').text('0');
+        } else {
+            let nombre = target === 'pc' ? 'PC Gamer' : (target === 'ps5' ? 'PlayStation 5' : 'Xbox 360');
+            $('#selected-console-text').val(nombre);
+            $('#hrs').prop('disabled', false).val(1);
+            calcularTotal();
         }
     });
 
-    // 4. FILTRO DE JUEGOS
-    $('#buscador-juegos').on('keyup', function() {
+    // ==========================================
+    // 2. FILTRO DE JUEGOS (Buscador)
+    // ==========================================
+    $('.search-game').on('keyup', function() {
         let texto = $(this).val().toLowerCase();
-        $('#lista-juegos .juego-item').each(function() {
-            let nombre = $(this).data('nombre').toLowerCase();
+        let consola = $(this).data('console');
+        
+        $('#content-' + consola + ' .game-card').each(function() {
+            let nombre = $(this).data('name');
             if (nombre.includes(texto)) {
                 $(this).show();
             } else {
@@ -49,38 +48,123 @@ $(document).ready(function() {
         });
     });
 
-    // 5. VALIDACIÓN FORMULARIO
-    $('#edad').on('input', function() {
-        this.value = this.value.replace(/[^0-9]/g, '');
+    // ==========================================
+    // 3. CALCULADORA DINÁMICA Y MODAL (Temporizador)
+    // ==========================================
+    let timerInterval;
+
+    function calcularTotal() {
+        if (consolaActual === 'bebidas') return;
+        let horas = $('#hrs').val();
+        let precioHora = precios[consolaActual];
+        $('#total').text(horas * precioHora);
+    }
+
+    $('#hrs').on('input', function() {
+        calcularTotal();
     });
 
-    $('#formulario-reserva').submit(function(e) {
-        e.preventDefault();
-        let isValid = true;
+    $('#btnModal').click(function() {
+        if(consolaActual === 'bebidas') {
+            alert("Para comprar bebidas, usa el formulario de la Bitácora (Live).");
+            return;
+        }
 
-        const nombre = $('#nombre');
-        if (!/^[A-Za-z\s]{3,}$/.test(nombre.val().trim())) {
-            nombre.addClass('is-invalid'); isValid = false;
-        } else { nombre.removeClass('is-invalid'); }
+        // Preparar datos en el Modal
+        $('#modal-console').text($('#selected-console-text').val());
+        $('#modal-hrs').text($('#hrs').val());
+        $('#modal-total').text($('#total').text());
 
-        const correo = $('#correo');
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo.val())) {
-            correo.addClass('is-invalid'); isValid = false;
-        } else { correo.removeClass('is-invalid'); }
+        // Mostrar Modal
+        let myModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+        myModal.show();
 
-        const consola = $('#consola-reserva');
-        if (consola.val() === '') {
-            consola.addClass('is-invalid'); isValid = false;
-        } else { consola.removeClass('is-invalid'); }
+        // Iniciar Temporizador de 5 minutos (300 segundos)
+        let timeLeft = 300;
+        $('#timer').text('05:00');
+        
+        clearInterval(timerInterval);
+        timerInterval = setInterval(function() {
+            timeLeft--;
+            let minutes = Math.floor(timeLeft / 60);
+            let seconds = timeLeft % 60;
+            $('#timer').text(`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
 
-        const edad = $('#edad');
-        if (edad.val() === '' || Number(edad.val()) < 12) {
-            edad.addClass('is-invalid'); isValid = false;
-        } else { edad.removeClass('is-invalid'); }
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                myModal.hide();
+                alert("Tiempo de reserva expirado.");
+                addLog("SISTEMA", "Reserva cancelada por tiempo expirado.");
+            }
+        }, 1000);
+    });
 
-        if (isValid) {
-            $('#msjExito').fadeIn('fast').delay(2000).fadeOut('fast');
-            this.reset();
+    // Botón Cancelar del Modal
+    $('#btnCancel').click(function() {
+        clearInterval(timerInterval);
+        addLog("SISTEMA", "El usuario canceló la reserva.");
+    });
+
+    // Botón Procesar Pago (Toast Alert - Reto PRO)
+    $('#btnConfirmPayment').click(function() {
+        clearInterval(timerInterval);
+        let myModal = bootstrap.Modal.getInstance(document.getElementById('confirmModal'));
+        myModal.hide();
+
+        // Mostrar Toast con slideDown
+        $('#toastAlert').slideDown('fast').delay(3000).fadeOut('fast');
+        
+        // Registrar en Bitácora
+        addLog("RESERVA", `Estación reservada: ${$('#modal-console').text()} por ${$('#modal-hrs').text()} hrs.`);
+    });
+
+    // ==========================================
+    // 4. BITÁCORA Y TIKTOK LIVE (Día 1 y 2)
+    // ==========================================
+    function addLog(tipo, mensaje) {
+        let hora = new Date().toLocaleTimeString();
+        let log = `<div><span class="text-warning">[${hora}]</span> <span class="text-info">${tipo}:</span> ${mensaje}</div>`;
+        $('#logOutput').append(log);
+        // Auto-scroll al final
+        $('#logOutput').scrollTop($('#logOutput')[0].scrollHeight);
+    }
+
+    // 4.1 Event Delegation (Día 1) - Clics y Doble Clics en el Live
+    $('#liveContainer').on('click', '.btn-offer', function() {
+        let prod = $(this).data('prod');
+        addLog("OFERTA_CLICK", `Añadido al carrito: ${prod}`);
+    });
+
+    $('#liveContainer').on('dblclick', '.btn-like', function() {
+        addLog("LIKE_STREAM", "¡El usuario envió corazones al Live!");
+    });
+
+    // 4.2 Evento Teclado (Día 1) - Chat del Live
+    $('#chatInput').on('keyup', function(e) {
+        if(e.key !== 'Enter') {
+            addLog("CHAT_INPUT", `Escribiendo: "${$(this).val()}"`);
         }
     });
+
+    // 4.3 Formulario Submit y Change (Día 2)
+    $('#variantSelect').on('change', function() {
+        addLog("CAMBIO_VARIANTE", `Seleccionó sabor: ${$(this).val()}`);
+    });
+
+    $('#liveForm').submit(function(e) {
+        e.preventDefault();
+        let user = $('#userTikTok').val();
+        let variant = $('#variantSelect').val();
+        
+        if(user.trim() === '') {
+            addLog("ERROR", "Falta el nombre de usuario de TikTok.");
+            return;
+        }
+
+        addLog("COMPRA_EXITOSA", `Pedido de ${user} confirmado. Sabor: ${variant}`);
+        $(this)[0].reset();
+    });
+
+    // Cargar estado inicial
+    calcularTotal();
 });
