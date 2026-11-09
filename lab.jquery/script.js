@@ -1,19 +1,14 @@
 $(document).ready(function() {
 
-    // ==========================================
     // 1. RELOJ EN TIEMPO REAL
-    // ==========================================
     function updateClock() {
         let now = new Date();
-        let timeString = now.toLocaleTimeString('es-ES');
-        $('#liveClock').text(timeString);
+        $('#liveClock').text(now.toLocaleTimeString('es-ES'));
     }
     setInterval(updateClock, 1000);
     updateClock();
 
-    // ==========================================
     // 2. DATOS DEL CATÁLOGO
-    // ==========================================
     const catalogData = {
         'pc': [
             { name: 'League of Legends', icon: 'fa-gamepad' },
@@ -45,90 +40,116 @@ $(document).ready(function() {
 
     let currentService = '';
     let currentPricePerHour = 0;
+    let currentStation = '';
     let timerInterval;
+    let playInterval; // Para el cronómetro de "Empezar"
     let modalInstance = null;
 
-    // ==========================================
-    // 3. SELECCIÓN DE MENÚ PRINCIPAL
-    // ==========================================
+    // 3. SELECCIÓN DE MENÚ (Muestra las 10 máquinas)
     $('.giant-btn').click(function() {
-        let target = $(this).data('target');
-        currentService = target;
+        currentService = $(this).data('target');
         
-        // Cambiar de vista
+        // Precios
+        if (currentService === 'pc') currentPricePerHour = 15;
+        if (currentService === 'ps5') currentPricePerHour = 12;
+        if (currentService === 'xbox') currentPricePerHour = 8;
+        if (currentService === 'bebidas') currentPricePerHour = 0;
+
         $('#mainMenu').fadeOut('fast', function() {
-            $('#catalogSection').fadeIn('fast').css('display', 'flex');
-            loadGames(target);
-        });
-
-        // Setear precios
-        if (target === 'pc') currentPricePerHour = 15;
-        if (target === 'ps5') currentPricePerHour = 12;
-        if (target === 'xbox') currentPricePerHour = 8;
-        if (target === 'bebidas') currentPricePerHour = 0;
-
-        // Actualizar titulo
-        let titles = { 'pc': 'Juegos de PC', 'ps5': 'Juegos de PS5', 'xbox': 'Juegos de Xbox', 'bebidas': 'Bebidas y Snacks' };
-        $('#catalogTitle').text(titles[target]);
-        $('#gameSearch').val(''); // Limpiar buscador
-    });
-
-    // Volver al menú
-    $('#btnBack').click(function() {
-        $('#catalogSection').fadeOut('fast', function() {
-            $('#mainMenu').fadeIn('fast').css('display', 'flex');
+            if (currentService === 'bebidas') {
+                // Bebidas no tiene máquinas, va directo al catálogo
+                $('#catalogSection').fadeIn('fast').css('display', 'flex');
+                $('#stationView').hide();
+                $('#gameView').show();
+                loadGames('bebidas');
+            } else {
+                // Consolas muestran las máquinas primero
+                $('#stationView').fadeIn('fast').css('display', 'grid');
+                $('#gameView').hide();
+                generateStations(currentService);
+            }
         });
     });
 
-    // Cargar juegos en el grid
+    // 4. GENERAR LAS 10 MÁQUINAS (Algunas ocupadas aleatoriamente)
+    function generateStations(service) {
+        let grid = $('#stationGrid');
+        grid.empty();
+        let prefix = service.toUpperCase();
+        
+        for (let i = 1; i <= 10; i++) {
+            let isBusy = Math.random() < 0.3; // 30% de probabilidad de estar ocupada
+            let statusClass = isBusy ? 'busy' : 'available';
+            let statusText = isBusy ? 'Ocupada' : 'Libre';
+            
+            let card = `
+                <div class="station-card ${statusClass}" data-station="${prefix}-${i}">
+                    <i class="fas fa-desktop"></i>
+                    <h4>${prefix}-${i}</h4>
+                    <span>${statusText}</span>
+                </div>
+            `;
+            grid.append(card);
+        }
+
+        // Evento clic en una máquina
+        $('.station-card.available').click(function() {
+            currentStation = $(this).data('station');
+            $('#stationView').fadeOut('fast', function() {
+                $('#gameView').fadeIn('fast');
+                loadGames(service);
+            });
+        });
+    }
+
+    // 5. CARGAR JUEGOS Y BOTONES DE ACCIÓN
     function loadGames(service) {
         let grid = $('#gameGrid');
         grid.empty();
 
         catalogData[service].forEach(game => {
-            let card = `
+            grid.append(`
                 <div class="game-card" data-name="${game.name.toLowerCase()}">
                     <i class="fas ${game.icon}"></i>
                     <span>${game.name}</span>
                 </div>
-            `;
-            grid.append(card);
+            `);
         });
 
-        // Evento para reservar al hacer clic en un juego
-        $('.game-card').click(function() {
-            if (currentService === 'bebidas') {
-                addLog("COMPRA", `Snack/Bebida solicitada: ${$(this).find('span').text()}`);
-                $('#toastAlert').html('<i class="fas fa-check-circle text-info me-2"></i> ¡Producto añadido!').slideDown('fast').delay(2000).fadeOut('fast');
-            } else {
-                abrirModalReserva($(this).find('span').text());
-            }
-        });
+        // Mostrar panel de acciones si no es bebida
+        if (service !== 'bebidas') {
+            $('#actionPanel').show();
+            $('#currentStationName').text(currentStation);
+            $('#startPrice').text(currentPricePerHour);
+        } else {
+            $('#actionPanel').hide();
+        }
     }
 
-    // Filtro Buscador
-    $('#gameSearch').on('keyup', function() {
-        let val = $(this).val().toLowerCase();
-        $('#gameGrid .game-card').each(function() {
-            let name = $(this).data('name');
-            if (name.includes(val)) { $(this).show(); } else { $(this).hide(); }
-        });
+    // Botón Volver
+    $('#btnBack').click(function() {
+        if (currentService === 'bebidas') {
+            $('#catalogSection').fadeOut('fast', () => $('#mainMenu').fadeIn('fast').css('display', 'flex'));
+        } else {
+            if ($('#gameView').is(':visible')) {
+                $('#gameView').fadeOut('fast', () => $('#stationView').fadeIn('fast').css('display', 'grid'));
+            } else {
+                $('#stationView').fadeOut('fast', () => $('#mainMenu').fadeIn('fast').css('display', 'flex'));
+            }
+        }
     });
 
-    // ==========================================
-    // 4. MODAL DE RESERVA Y TEMPORIZADOR
-    // ==========================================
-    function abrirModalReserva(juegoNombre) {
-        // Preparar Modal
-        $('#modalConsoleName').text(juegoNombre);
+    // 6. LÓGICA DE RESERVAR (Modal de 5 min)
+    $('#btnReservar').click(function() {
+        $('#modalActionType').text('Reserva');
+        $('#modalConsoleName').text(currentStation + ' - ' + currentService.toUpperCase());
         $('#hrsInput').val(1);
-        calcularTotal();
+        calcularTotalReserva();
 
         let modalElement = document.getElementById('reservaModal');
         modalInstance = new bootstrap.Modal(modalElement);
         modalInstance.show();
 
-        // Iniciar Temporizador (5 min = 300 seg)
         let timeLeft = 300;
         $('#timerDisplay').text('05:00');
         
@@ -138,65 +159,73 @@ $(document).ready(function() {
             let m = Math.floor(timeLeft / 60);
             let s = timeLeft % 60;
             $('#timerDisplay').text(`${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`);
-
             if (timeLeft <= 0) {
                 clearInterval(timerInterval);
-                if(modalInstance) modalInstance.hide();
+                modalInstance.hide();
                 alert("Tiempo de reserva expirado.");
-                addLog("SISTEMA", "Reserva cancelada por tiempo.");
             }
         }, 1000);
-    }
+    });
 
-    // Calculadora en el Modal
-    $('#hrsInput').on('input', calcularTotal);
-    function calcularTotal() {
+    $('#hrsInput').on('input', calcularTotalReserva);
+    function calcularTotalReserva() {
         let hrs = $('#hrsInput').val();
         if (hrs < 1) { $('#hrsInput').val(1); hrs = 1; }
         $('#totalPay').text(hrs * currentPricePerHour);
     }
 
-    // Botones del Modal
-    $('#btnCancel').click(function() {
-        clearInterval(timerInterval);
-        addLog("SISTEMA", "El usuario canceló la reserva.");
+    // 7. LÓGICA DE EMPEZAR AHORA (Modal sin temporizador de reserva)
+    $('#btnEmpezar').click(function() {
+        $('#modalActionType').text('Empezar');
+        $('#modalConsoleName').text(currentStation + ' - ' + currentService.toUpperCase());
+        $('#hrsInput').val(1);
+        calcularTotalReserva();
+        
+        // Ocultar el temporizador de reserva para "Empezar"
+        $('#timerContainer').hide(); 
+
+        let modalElement = document.getElementById('reservaModal');
+        modalInstance = new bootstrap.Modal(modalElement);
+        modalInstance.show();
     });
 
+    // Confirmar Pago (Funciona para Reservar y Empezar)
     $('#btnConfirm').click(function() {
         clearInterval(timerInterval);
         if(modalInstance) modalInstance.hide();
-
-        // Toast (Reto PRO)
-        $('#toastAlert').slideDown('fast').delay(3000).fadeOut('fast');
         
-        // Registrar en Bitácora
-        let juego = $('#modalConsoleName').text();
+        let action = $('#modalActionType').text();
         let hrs = $('#hrsInput').val();
         let total = $('#totalPay').text();
-        addLog("RESERVA", `${juego} por ${hrs} hrs. Total: ${total} BOB`);
+
+        $('#toastAlert').slideDown('fast').delay(3000).fadeOut('fast');
+        addLog(action.toUpperCase(), `${currentStation} por ${hrs} hrs. Total: ${total} BOB`);
+        
+        // Marcar la máquina como ocupada visualmente (opcional)
+        $(`.station-card[data-station="${currentStation}"]`).removeClass('available').addClass('busy').find('span').text('Ocupada');
     });
 
-    // ==========================================
-    // 5. BITÁCORA (Función para escribir en consola)
-    // ==========================================
+    // 8. BITÁCORA Y MENÚS
     function addLog(tipo, mensaje) {
         let hora = new Date().toLocaleTimeString();
-        let log = `<div><span class="text-warning">[${hora}]</span> <span class="text-info">${tipo}:</span> ${mensaje}</div>`;
-        $('#logOutput').append(log);
+        $('#logOutput').append(`<div><span class="text-warning">[${hora}]</span> <span class="text-info">${tipo}:</span> ${mensaje}</div>`);
         $('#logOutput').scrollTop($('#logOutput')[0].scrollHeight);
     }
-    // ==========================================
-    // 6. MENÚ DE AJUSTES (ENGRANAJE)
-    // ==========================================
+
     $('#btnSettings').click(function(e) {
-        e.stopPropagation(); // Evita que se cierre inmediatamente
+        e.stopPropagation();
         $('#settingsMenu').slideToggle('fast');
     });
-
-    // Cerrar el menú si se hace clic afuera
     $(document).click(function(e) {
-        if (!$(e.target).closest('.brand-box').length) {
-            $('#settingsMenu').slideUp('fast');
-        }
+        if (!$(e.target).closest('.brand-box').length) $('#settingsMenu').slideUp('fast');
     });
+
+    // Filtro Buscador
+    $('#gameSearch').on('keyup', function() {
+        let val = $(this).val().toLowerCase();
+        $('#gameGrid .game-card').each(function() {
+            $(this).data('name').includes(val) ? $(this).show() : $(this).hide();
+        });
+    });
+
 });
