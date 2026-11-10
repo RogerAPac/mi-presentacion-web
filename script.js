@@ -1,30 +1,27 @@
 $(document).ready(function() {
     
-    // 1. Efecto Hamburguesa (slideToggle como pide la guía)
+    // 1. Menú Hamburguesa (Efecto slideToggle de jQuery)
     $('#btnHamburguesa').click(function() {
         $('#navMenu').slideToggle('fast');
-        $('#hamburgerIcon').toggleClass('open');
     });
 
-    // 2. Navegación de Secciones (Mostrar solo 1 a la vez con fade)
+    // 2. Navegación entre secciones (Ocultar todo y mostrar solo 1)
     $('.nav-link-btn').click(function(e) {
-        e.preventDefault(); // Evita que salte arriba de la página
+        e.preventDefault();
         
-        // Obtener el ID de la sección que queremos mostrar
         let target = $(this).data('target');
         
-        // Ocultar menú
+        // Cerrar menú
         $('#navMenu').slideUp('fast');
-        $('#hamburgerIcon').removeClass('open');
 
-        // Efecto de transición: Ocultar la actual y mostrar la nueva
+        // Ocultar la sección actual y mostrar la nueva con un efecto suave
         $('.seccion-contenido.activa').fadeOut(200, function() {
             $(this).removeClass('activa');
             $('#' + target).fadeIn(200).addClass('activa');
         });
     });
 
-    // 3. Bloqueo de letras en Edad
+    // 3. Bloqueo de letras en el campo Edad en tiempo real
     $('#edad').on('input', function () {
         this.value = this.value.replace(/[^0-9]/g, '');
     });
@@ -59,11 +56,5 @@ $(document).ready(function() {
             this.reset();
             setTimeout(() => { $('#msjExito').fadeOut(200); }, 3000);
         }
-    });
-
-    // 5. Responsive (Móvil / Escritorio)
-    $(window).on('resize', function () {
-        const esMovil = window.innerWidth <= 768;
-        $('html').toggleClass('device-mobile', esMovil).toggleClass('device-desktop', !esMovil);
     });
 });
