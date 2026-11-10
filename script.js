@@ -2,6 +2,7 @@ $(document).ready(function() {
 
     $('#btnHidratar').off('click').on('click', function() {
         let $box = $('#contenedorMenu');
+        let $btn = $(this);
         
         // Validar que no se hidrate dos veces
         if ($box.attr('data-hidratado') === 'true') return;
@@ -9,21 +10,25 @@ $(document).ready(function() {
         // 1. Cambiar el fondo del contenedor a verde claro
         $box.css({'background-color': '#dcfce7', 'border-color': '#22c55e'});
 
-        // 2. Ocultar el texto de "modo estático", ocultar el botón y mostrar el mensaje "Página hidratada"
-        $('#textoEstatico').fadeOut(200, function() {
-            $('#btnHidratar').hide();
-            $('#msjHidratacion').fadeIn(200); // Aquí salta el mensaje
-        });
+        // 2. Cambiar el texto de arriba y mostrar el mensaje de "Página hidratada"
+        $('#textoEstatico').hide();
+        $('#msjHidratacion').fadeIn(200);
 
-        // 3. Hidratar el ícono de la hamburguesa
+        // 3. Deshabilitar el botón y ponerlo verde (para que quede constancia de que funcionó)
+        $btn.prop('disabled', true)
+            .removeClass('btn-warning')
+            .addClass('btn-success')
+            .html('<i class="fas fa-check"></i> Hidratado');
+
+        // 4. Hidratar el ícono de la hamburguesa
         $('#hamburgerIcon').css('color', 'var(--accent)');
 
-        // 4. Adjuntar los eventos interactivos (Hamburguesa)
+        // 5. Adjuntar los eventos interactivos (Hamburguesa)
         $('#btnHamburguesa').off('click').on('click', function() {
             $('#navMenu').slideToggle('fast');
         });
 
-        // 5. Eventos interactivos (Pestañas)
+        // 6. Eventos interactivos (Pestañas)
         $('.nav-link-btn').off('click').on('click', function(e) {
             e.preventDefault();
             let target = $(this).data('target');
@@ -36,7 +41,7 @@ $(document).ready(function() {
             });
         });
 
-        // 6. Eventos del formulario (Prevención de Memory Leaks)
+        // 7. Eventos del formulario
         $('#edad').off('input').on('input', function () {
             this.value = this.value.replace(/[^0-9]/g, '');
         });
@@ -72,7 +77,7 @@ $(document).ready(function() {
             }
         });
 
-        // 7. Marcar como hidratado para que no se pueda volver a presionar
+        // 8. Marcar como hidratado
         $box.attr('data-hidratado', 'true');
     });
 
