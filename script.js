@@ -1,54 +1,69 @@
-function toggleMenu() {
-    const body = document.getElementById('contentBody');
-    const menu = document.getElementById('navMenu');
-    const icon = document.getElementById('hamburgerIcon');
-    body.classList.toggle('open');
-    icon.classList.toggle('open');
-    if (menu) menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
-}
+$(document).ready(function() {
+    
+    // 1. Efecto Hamburguesa (slideToggle como pide la guía)
+    $('#btnHamburguesa').click(function() {
+        $('#navMenu').slideToggle('fast');
+        $('#hamburgerIcon').toggleClass('open');
+    });
 
-document.getElementById('edad').addEventListener('input', function () {
-    this.value = this.value.replace(/[^0-9]/g, '');
-});
+    // 2. Navegación de Secciones (Mostrar solo 1 a la vez con fade)
+    $('.nav-link-btn').click(function(e) {
+        e.preventDefault(); // Evita que salte arriba de la página
+        
+        // Obtener el ID de la sección que queremos mostrar
+        let target = $(this).data('target');
+        
+        // Ocultar menú
+        $('#navMenu').slideUp('fast');
+        $('#hamburgerIcon').removeClass('open');
 
-document.getElementById('formulario').addEventListener('submit', function (e) {
-    e.preventDefault();
-    let isValid = true;
+        // Efecto de transición: Ocultar la actual y mostrar la nueva
+        $('.seccion-contenido.activa').fadeOut(200, function() {
+            $(this).removeClass('activa');
+            $('#' + target).fadeIn(200).addClass('activa');
+        });
+    });
 
-    const nombre = document.getElementById('nombre');
-    const regexNombre = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{3,}$/;
-    if (!regexNombre.test(nombre.value.trim())) { nombre.classList.add('is-invalid'); isValid = false; }
-    else nombre.classList.remove('is-invalid');
+    // 3. Bloqueo de letras en Edad
+    $('#edad').on('input', function () {
+        this.value = this.value.replace(/[^0-9]/g, '');
+    });
 
-    const correo = document.getElementById('correo');
-    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!regexEmail.test(correo.value)) { correo.classList.add('is-invalid'); isValid = false; }
-    else correo.classList.remove('is-invalid');
+    // 4. Validación del Formulario
+    $('#formulario').submit(function (e) {
+        e.preventDefault();
+        let isValid = true;
 
-    const pass = document.getElementById('pass');
-    const regexPass = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
-    if (!regexPass.test(pass.value)) { pass.classList.add('is-invalid'); isValid = false; }
-    else pass.classList.remove('is-invalid');
+        const nombre = $('#nombre');
+        if (!/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{3,}$/.test(nombre.val().trim())) { nombre.addClass('is-invalid'); isValid = false; }
+        else nombre.removeClass('is-invalid');
 
-    const edad = document.getElementById('edad');
-    if (edad.value === '' || Number(edad.value) < 18) { edad.classList.add('is-invalid'); isValid = false; }
-    else edad.classList.remove('is-invalid');
+        const correo = $('#correo');
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo.val())) { correo.addClass('is-invalid'); isValid = false; }
+        else correo.removeClass('is-invalid');
 
-    const terminos = document.getElementById('terminos');
-    if (!terminos.checked) { document.getElementById('err-term').style.display = 'block'; isValid = false; }
-    else document.getElementById('err-term').style.display = 'none';
+        const pass = $('#pass');
+        if (!/^(?=.*[A-Z])(?=.*\d).{8,}$/.test(pass.val())) { pass.addClass('is-invalid'); isValid = false; }
+        else pass.removeClass('is-invalid');
 
-    if (isValid) {
-        const msj = document.getElementById('msjExito');
-        msj.style.display = 'block';
-        this.reset();
-        setTimeout(() => { msj.style.display = 'none'; }, 3000);
-    }
-});
+        const edad = $('#edad');
+        if (edad.val() === '' || Number(edad.val()) < 18) { edad.addClass('is-invalid'); isValid = false; }
+        else edad.removeClass('is-invalid');
 
-window.addEventListener('resize', function () {
-    const html = document.documentElement;
-    const esMovil = window.innerWidth <= 768;
-    html.classList.toggle('device-mobile', esMovil);
-    html.classList.toggle('device-desktop', !esMovil);
+        const terminos = $('#terminos');
+        if (!terminos.is(':checked')) { $('#err-term').show(); isValid = false; }
+        else $('#err-term').hide();
+
+        if (isValid) {
+            $('#msjExito').fadeIn(200);
+            this.reset();
+            setTimeout(() => { $('#msjExito').fadeOut(200); }, 3000);
+        }
+    });
+
+    // 5. Responsive (Móvil / Escritorio)
+    $(window).on('resize', function () {
+        const esMovil = window.innerWidth <= 768;
+        $('html').toggleClass('device-mobile', esMovil).toggleClass('device-desktop', !esMovil);
+    });
 });
