@@ -33,18 +33,23 @@
                 <button class="carousel-control-next" type="button" data-bs-target="#carruselFotos" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
             </section>
 
-            <!-- ALERTA DE HIDRATACIÓN -->
-            <div id="contenedorMenu" data-hidratado="false" class="text-center p-3" style="background-color: #fef3c7; border-bottom: 1px solid #f59e0b;">
-                <!-- Este div muestra el mensaje de éxito al hidratar -->
-                <div id="msjHidratacion" class="alert alert-success fw-bold py-2 mb-2" style="display: none;">
-                    <i class="fas fa-check-circle"></i> ¡Página hidratada!
-                </div>
-                
-                <p id="textoEstatico" class="mb-2 text-dark fw-bold small"><i class="fas fa-exclamation-triangle text-warning"></i> Página en modo estático (HTML plano)</p>
-                <button id="btnHidratar" class="btn btn-warning btn-sm fw-bold shadow-sm">
-                    <i class="fas fa-bolt"></i> Hidratar Interfaz
-                </button>
-            </div>
+<!-- ALERTA DE HIDRATACIÓN -->
+<div id="contenedorMenu" data-hidratado="false" class="text-center p-3" style="background-color: #fef3c7; border-bottom: 1px solid #f59e0b; transition: all 0.3s;">
+    
+    <p id="textoEstatico" class="mb-2 text-dark fw-bold small">
+        <i class="fas fa-exclamation-triangle text-warning"></i> Página en modo estático (HTML plano)
+    </p>
+
+    <!-- Mensaje oculto por defecto -->
+    <div id="msjHidratacion" class="alert alert-success fw-bold py-1 mb-2" style="display: none; font-size: 14px;">
+        <i class="fas fa-check-circle"></i> ¡Página hidratada!
+    </div>
+
+    <!-- El botón se queda en pantalla -->
+    <button id="btnHidratar" class="btn btn-warning btn-sm fw-bold shadow-sm">
+        <i class="fas fa-bolt"></i> Hidratar Interfaz
+    </button>
+</div>
 
             <!-- Hamburguesa -->
             <header class="hamburger-header" id="btnHamburguesa">
