@@ -1,33 +1,53 @@
 $(document).ready(function() {
+
+    // ==========================================
+    // 1. SIMULACIÓN DE HIDRATACIÓN (Como pide el PDF)
+    // ==========================================
     
-    // 1. Menú Hamburguesa (Efecto slideToggle de jQuery)
-    $('#btnHamburguesa').click(function() {
-        $('#navMenu').slideToggle('fast');
-    });
-
-    // 2. Navegación entre secciones (Ocultar todo y mostrar solo 1)
-    $('.nav-link-btn').click(function(e) {
-        e.preventDefault();
+    function hidratarInterfaz() {
+        let $menuBox = $('#navMenu');
         
-        let target = $(this).data('target');
-        
-        // Cerrar menú
-        $('#navMenu').slideUp('fast');
+        // Si ya se hidrató, no hacemos nada (Evita Memory Leaks)
+        if ($menuBox.attr('data-hidratado') === 'true') return;
 
-        // Ocultar la sección actual y mostrar la nueva con un efecto suave
-        $('.seccion-contenido.activa').fadeOut(200, function() {
-            $(this).removeClass('activa');
-            $('#' + target).fadeIn(200).addClass('activa');
+        // Hidratamos el botón de la hamburguesa (adjuntamos evento sin redibujar)
+        $('#btnHamburguesa').off('click').on('click', function() {
+            $menuBox.slideToggle(300);
         });
-    });
 
-    // 3. Bloqueo de letras en el campo Edad en tiempo real
-    $('#edad').on('input', function () {
+        // Hidratamos los enlaces del menú
+        $('.nav-link-btn').off('click').on('click', function(e) {
+            e.preventDefault();
+            let target = $(this).data('target');
+            
+            $menuBox.slideUp(300);
+
+            // Cambiamos la sección visible
+            $('.seccion-contenido.activa').fadeOut(200, function() {
+                $(this).removeClass('activa');
+                $('#' + target).fadeIn(200).addClass('activa');
+            });
+        });
+
+        // Marcamos como hidratado
+        $menuBox.attr('data-hidratado', 'true');
+        console.log("✅ Interfaz hidratada correctamente sin fugas de memoria.");
+    }
+
+    // Ejecutar la hidratación después de 500ms (como pide el profe)
+    setTimeout(hidratarInterfaz, 500);
+
+
+    // ==========================================
+    // 2. VALIDACIÓN DE FORMULARIO (Prevención de Memory Leaks)
+    // ==========================================
+
+    // Usamos .off() antes de .on() para limpiar cualquier evento previo
+    $('#edad').off('input').on('input', function () {
         this.value = this.value.replace(/[^0-9]/g, '');
     });
 
-    // 4. Validación del Formulario
-    $('#formulario').submit(function (e) {
+    $('#formulario').off('submit').on('submit', function (e) {
         e.preventDefault();
         let isValid = true;
 
