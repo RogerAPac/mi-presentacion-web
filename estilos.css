@@ -1,168 +1,149 @@
 :root {
-    --primary: #0b2545; 
-    --accent: #f97316; 
-    --light: #f8fafc;
+    --primary: #0b2545;
+    --primary-soft: #1e293b;
+    --accent: #2563eb;      /* azul ejecutivo en vez de naranja */
+    --light: #f1f5f9;
+    --border: #e2e8f0;
 }
 
-body { 
-    font-family: 'Poppins', sans-serif; 
-    background-color: var(--light); 
+* { box-sizing: border-box; }
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--light);
+    color: #1e293b;
+    padding: 8px;
+    font-size: 13px;
 }
 
-/* 1. NavBar Minimalista */
-.navbar { 
-    background-color: var(--primary) !important; 
-}
-.navbar-brand { 
-    color: white !important; 
-    font-weight: 600; 
+/* PWA wrapper */
+.pwa-wrapper { max-width: 100%; margin: 0 auto; }
+
+.pwa-container {
+    max-width: 768px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    overflow: hidden;
+    border-top: 3px solid var(--accent);
 }
 
-/* 2. Carrusel */
-.carousel-item img { 
-    height: 300px; 
-    object-fit: cover; 
-    border-bottom: 4px solid var(--accent); 
+/* Marco tipo smartphone en PC */
+@media (min-width: 1025px) {
+    body { padding: 16px 8px; }
+    .device-desktop .pwa-container {
+        max-width: 420px;
+        border-radius: 24px;
+        border: 6px solid #0b2545;
+        box-shadow: 0 16px 50px rgba(0,0,0,0.22);
+        min-height: 80vh;
+    }
+    .device-desktop .pwa-wrapper { max-width: 460px; }
+    .device-desktop footer { max-width: 420px; margin: 0 auto; border-radius: 0 0 18px 18px; }
 }
 
-/* 3. Seccion Principal (Hamburguesa) */
-.main-container { 
-    max-width: 800px; 
-    margin: 20px auto; 
-    background: white; 
-    border-radius: 12px; 
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
-    overflow: hidden; 
+/* NavBar */
+.navbar {
+    background: var(--primary) !important;
+    border-bottom: 2px solid var(--accent);
+    padding: 10px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.navbar-brand { color: #fff !important; font-weight: 600; font-size: 14px; }
+.badge-pwa {
+    background: var(--accent); color: #fff;
+    font-size: 9px; font-weight: 700;
+    padding: 2px 7px; border-radius: 20px; letter-spacing: 1px;
 }
 
-.hamburger-header { 
-    background: var(--light); 
-    padding: 15px 20px; 
-    cursor: pointer; 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    border-bottom: 1px solid #e2e8f0; 
+/* Carrusel */
+.carousel-item img {
+    height: 150px;
+    object-fit: cover;
+    border-bottom: 3px solid var(--accent);
 }
-.hamburger-header h4 { 
-    margin: 0; 
-    font-size: 16px; 
-    color: var(--primary); 
-    font-weight: 600; 
-}
-.hamburger-icon { 
-    font-size: 20px; 
-    color: var(--accent); 
-    transition: transform 0.3s; 
-}
-.hamburger-icon.open { 
-    transform: rotate(90deg); 
+@media (min-width: 1025px) {
+    .device-desktop .carousel-item img { height: 130px; }
 }
 
-.content-body { 
-    display: none; 
-    padding: 20px; 
-    animation: fadeIn 0.4s; 
+/* Hamburguesa */
+.hamburger-header {
+    background: var(--light);
+    padding: 10px 14px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.2s;
 }
-.content-body.open { 
-    display: block; 
-}
-@keyframes fadeIn { 
-    from { opacity: 0; } 
-    to { opacity: 1; } 
-}
+.hamburger-header:hover { background: #e2e8f0; }
+.hamburger-header h4 { margin: 0; font-size: 13px; color: var(--primary); font-weight: 600; }
+.hamburger-icon { font-size: 17px; color: var(--accent); transition: transform 0.3s; }
+.hamburger-icon.open { transform: rotate(90deg); }
 
-/* 4. Estilos Internos */
-.section-title { 
-    font-size: 14px; 
-    color: var(--accent); 
-    font-weight: 600; 
-    text-transform: uppercase; 
-    margin-bottom: 10px; 
-    border-bottom: 2px solid var(--accent); 
-    display: inline-block; 
+/* Menú desplegable */
+.nav-menu { display: none; background: var(--primary-soft); padding: 6px 14px; border-bottom: 1px solid #334155; }
+.nav-menu ul { list-style: none; margin: 0; padding: 0; }
+.nav-menu ul li { padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.nav-menu ul li:last-child { border-bottom: none; }
+.nav-menu ul li a { color: #cbd5e1; text-decoration: none; font-size: 12px; display: block; }
+.nav-menu ul li a:hover { color: var(--accent); }
+
+/* Contenido */
+.content-body { display: none; padding: 12px 14px; animation: fadeIn 0.3s; }
+.content-body.open { display: block; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.section-title {
+    font-size: 11px; color: var(--accent); font-weight: 600;
+    text-transform: uppercase; margin-bottom: 5px;
+    border-bottom: 2px solid var(--accent);
+    display: inline-block; padding-bottom: 1px;
 }
 
 /* Horario */
-.horario-table th { 
-    background-color: var(--primary); 
-    color: white; 
-    font-size: 12px; 
-}
-.horario-table td { 
-    font-size: 12px; 
+.horario-table th { background: var(--primary); color: #fff; font-size: 10px; padding: 3px; }
+.horario-table td { font-size: 10px; padding: 3px; }
+
+/* Frase */
+.frase-box {
+    background: linear-gradient(135deg, var(--primary), #134074);
+    color: #fff; padding: 12px; border-radius: 6px;
+    text-align: center; font-style: italic; font-size: 12px;
+    margin: 8px 0; border-left: 3px solid var(--accent);
 }
 
-/* Frase Grafica */
-.frase-box { 
-    background: linear-gradient(135deg, var(--primary), #134074); 
-    color: white; 
-    padding: 20px; 
-    border-radius: 8px; 
-    text-align: center; 
-    font-style: italic; 
-    margin-top: 15px; 
-}
+/* Tabs */
+.nav-tabs .nav-link { color: var(--primary); font-size: 12px; font-weight: 600; border: none; padding: 5px 10px; }
+.nav-tabs .nav-link.active { color: var(--accent); border-bottom: 2px solid var(--accent); background: none; }
+.list-group-item { font-size: 12px; cursor: pointer; border-color: var(--border); transition: background 0.2s; }
+.list-group-item:hover { background: #e0ecff; }
 
-/* Tabs Musica y Juegos */
-.nav-tabs .nav-link { 
-    color: var(--primary); 
-    font-size: 14px; 
-    font-weight: 600; 
-    border: none; 
-}
-.nav-tabs .nav-link.active { 
-    color: var(--accent); 
-    border-bottom: 2px solid var(--accent); 
-    background: none; 
-}
-.list-group-item { 
-    font-size: 13px; 
-    cursor: pointer; 
-    transition: background 0.2s; 
-}
-.list-group-item:hover { 
-    background-color: #ffe4d6; 
-}
-
-/* NUEVO: Estilo para las imagenes de favoritos */
 .fav-img {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
-    background-color: #f1f5f9;
-    border-radius: 6px;
-    margin-right: 15px;
-    padding: 3px;
+    width: 28px; height: 28px; object-fit: contain;
+    background: #f1f5f9; border-radius: 5px;
+    margin-right: 8px; padding: 2px; border: 1px solid var(--border);
 }
 
 /* Formulario */
-.form-control { 
-    font-size: 13px; 
-}
-.error-text { 
-    color: #dc2626; 
-    font-size: 11px; 
-    display: none; 
-}
-.is-invalid + .error-text { 
-    display: block; 
-}
+.form-control { font-size: 12px; }
+.form-control:focus { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15); }
+.error-text { color: #dc2626; font-size: 10px; display: none; margin-top: 1px; }
+.is-invalid + .error-text { display: block; }
 
-/* Footer 3 R.S. */
-footer { 
-    text-align: center; 
-    padding: 20px; 
-    background: var(--primary); 
-    color: white; 
-    margin-top: 30px; 
+.btn-enviar { background: var(--accent) !important; border: none !important; font-size: 12px; }
+.btn-enviar:hover { box-shadow: 0 3px 10px rgba(37, 99, 235, 0.4); }
+
+/* Footer */
+footer {
+    text-align: center; padding: 10px; background: var(--primary);
+    color: #fff; margin-top: 10px; border-radius: 0 0 10px 10px;
+    border-top: 2px solid var(--accent);
 }
-footer a { 
-    color: white; 
-    font-size: 20px; 
-    margin: 0 10px; 
-    transition: color 0.3s; 
-}
-footer a:hover { 
-    color: var(--accent); 
-}
+footer a { color: #fff; font-size: 16px; margin: 0 8px; transition: color 0.3s; }
+footer a:hover { color: var(--accent); }
+footer .small { font-size: 10px; }
