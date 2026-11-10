@@ -1,90 +1,84 @@
-v<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#0b2545">
-    <meta name="description" content="Portafolio PWA y presentación personal de Roger Paredes.">
     <title>Presentación Personal - Roger Paredes (PWA)</title>
     
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Tu CSS -->
     <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
 
-    <script>
-        (function () {
-            const esMovil = window.innerWidth <= 768 || /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
-            document.documentElement.classList.add(esMovil ? 'device-mobile' : 'device-desktop');
-        })();
-    </script>
-
     <div class="pwa-wrapper">
         <div class="pwa-container">
 
-            <!-- 1. HEADER (Navbar) -->
+            <!-- NavBar -->
             <header class="navbar">
-                <a class="navbar-brand" href="#"><i class="fas fa-code me-1"></i>Roger Paredes</a>
+                <a class="navbar-brand" href="#"><i class="fas fa-code me-2"></i>Roger Paredes</a>
                 <span class="badge-pwa">PWA</span>
             </header>
 
-            <!-- 2. SECTION (Carrusel) -->
-            <section id="carruselFotos" class="carousel slide" data-bs-ride="carousel" aria-label="Galería de fotos">
+            <!-- Carrusel -->
+            <section id="carruselFotos" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1000&q=80" class="d-block w-100" alt="Persona trabajando en computadora">
+                        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1000&q=80" class="d-block w-100" alt="Foto 1">
                     </div>
                     <div class="carousel-item">
-                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80" class="d-block w-100" alt="Equipo de trabajo colaborando">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80" class="d-block w-100" alt="Foto 2">
                     </div>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carruselFotos" data-bs-slide="prev" aria-label="Anterior">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carruselFotos" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carruselFotos" data-bs-slide="next" aria-label="Siguiente">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <button class="carousel-control-next" type="button" data-bs-target="#carruselFotos" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
                 </button>
             </section>
 
-            <!-- 3. HEADER (Hamburguesa) -->
-            <header class="hamburger-header" id="btnHamburguesa" role="button" tabindex="0" aria-label="Abrir menú de navegación">
-                <h1><i class="fas fa-user-circle me-1"></i> Mi Información Personal</h1>
-                <i class="fas fa-bars hamburger-icon" id="hamburgerIcon" aria-hidden="true"></i>
+            <!-- Hamburguesa -->
+            <header class="hamburger-header" id="btnHamburguesa">
+                <h1><i class="fas fa-user-circle me-2"></i> Mi Información Personal</h1>
+                <i class="fas fa-bars hamburger-icon" id="hamburgerIcon"></i>
             </header>
 
-            <!-- 4. NAV (Menú de Navegación) -->
-            <nav class="nav-menu" id="navMenu" aria-label="Menú principal">
+            <!-- Menú desplegable -->
+            <nav class="nav-menu" id="navMenu">
                 <ul>
-                    <li><a href="#pasatiempos" class="nav-link-btn" data-target="pasatiempos"><i class="fas fa-heart me-2" aria-hidden="true"></i>Pasatiempos</a></li>
-                    <li><a href="#horario" class="nav-link-btn" data-target="horario"><i class="fas fa-calendar me-2" aria-hidden="true"></i>Horario</a></li>
-                    <li><a href="#favoritos" class="nav-link-btn" data-target="favoritos"><i class="fas fa-star me-2" aria-hidden="true"></i>Favoritos</a></li>
-                    <li><a href="#contacto" class="nav-link-btn" data-target="contacto"><i class="fas fa-envelope me-2" aria-hidden="true"></i>Contacto</a></li>
+                    <li><a href="#" class="nav-link-btn" data-target="pasatiempos"><i class="fas fa-heart me-2"></i>Pasatiempos</a></li>
+                    <li><a href="#" class="nav-link-btn" data-target="horario"><i class="fas fa-calendar me-2"></i>Horario</a></li>
+                    <li><a href="#" class="nav-link-btn" data-target="favoritos"><i class="fas fa-star me-2"></i>Favoritos</a></li>
+                    <li><a href="#" class="nav-link-btn" data-target="contacto"><i class="fas fa-envelope me-2"></i>Contacto</a></li>
                 </ul>
             </nav>
 
-            <!-- 5. MAIN (Contenedor de Vistas) -->
+            <!-- Vistas -->
             <main class="content-body" id="contentBody">
 
-                <!-- SECTION: Pasatiempos -->
                 <section id="pasatiempos" class="seccion-contenido activa">
-                    <div class="row g-2">
-                        <div class="col-12 mb-2">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
                             <h2 class="section-title">Pasatiempos</h2>
-                            <p class="small text-muted mb-1">Videojuegos retro/fútbol, rock clásico, aprender librerías JS.</p>
+                            <p class="text-muted">Videojuegos retro/fútbol, rock clásico, aprender librerías JS.</p>
                         </div>
-                        <div class="col-12">
+                        <div class="col-md-6 mb-3">
                             <h2 class="section-title">Intereses</h2>
-                            <p class="small text-muted mb-0">Desarrollo web, ciberseguridad, docencia, proyectos socioproductivos.</p>
+                            <p class="text-muted">Desarrollo web, ciberseguridad, docencia, proyectos socioproductivos.</p>
                         </div>
                     </div>
                 </section>
 
-                <!-- SECTION: Horario -->
                 <section id="horario" class="seccion-contenido">
                     <h2 class="section-title">Horario</h2>
-                    <table class="table table-sm table-bordered horario-table text-center mb-0">
+                    <table class="table table-bordered horario-table text-center">
                         <thead>
                             <tr><th>Hora</th><th>Lun</th><th>Mar</th><th>Mié</th></tr>
                         </thead>
@@ -95,93 +89,76 @@ v<!DOCTYPE html>
                     </table>
                 </section>
 
-                <!-- SECTION: Favoritos -->
                 <section id="favoritos" class="seccion-contenido">
                     <h2 class="section-title">Favoritos</h2>
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#musica" type="button" role="tab">Música</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#juegos" type="button" role="tab">Juegos</button>
-                        </li>
+                        <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#musica" type="button">Música</button></li>
+                        <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#juegos" type="button">Juegos</button></li>
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane fade show active" id="musica" role="tabpanel">
+                        <div class="tab-pane fade show active" id="musica">
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item py-1 d-flex align-items-center" onclick="alert('Back In Black - AC/DC')" style="cursor:pointer;">
-                                    <img src="acdc.jpg" class="fav-img" alt="Portada AC/DC"><span>Back In Black</span>
-                                </li>
-                                <li class="list-group-item py-1 d-flex align-items-center" onclick="alert('Thunderstruck - AC/DC')" style="cursor:pointer;">
-                                    <img src="acdc.jpg" class="fav-img" alt="Portada AC/DC"><span>Thunderstruck</span>
-                                </li>
+                                <li class="list-group-item d-flex align-items-center" onclick="alert('Back In Black - AC/DC')"><img src="acdc.jpg" class="fav-img" alt=""><span>Back In Black</span></li>
+                                <li class="list-group-item d-flex align-items-center" onclick="alert('Thunderstruck - AC/DC')"><img src="acdc.jpg" class="fav-img" alt=""><span>Thunderstruck</span></li>
                             </ul>
                         </div>
-                        <div class="tab-pane fade" id="juegos" role="tabpanel">
+                        <div class="tab-pane fade" id="juegos">
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item py-1 d-flex align-items-center">
-                                    <img src="ef26.jpg" class="fav-img" alt="Portada eFootball"><span>eFootball</span>
-                                </li>
-                                <li class="list-group-item py-1 d-flex align-items-center">
-                                    <img src="prr.jpg" class="fav-img" alt="Portada Pokemon"><span>Pokemon Radical Red</span>
-                                </li>
+                                <li class="list-group-item d-flex align-items-center"><img src="ef26.jpg" class="fav-img" alt=""><span>eFootball</span></li>
+                                <li class="list-group-item d-flex align-items-center"><img src="prr.jpg" class="fav-img" alt=""><span>Pokemon Radical Red</span></li>
                             </ul>
                         </div>
                     </div>
                 </section>
 
-                <!-- SECTION: Contacto -->
                 <section id="contacto" class="seccion-contenido">
                     <h2 class="section-title">Contacto</h2>
                     <form id="formulario" novalidate>
-                        <div class="row g-1">
-                            <div class="col-12">
-                                <label for="nombre" class="visually-hidden">Nombre completo</label>
-                                <input type="text" class="form-control form-control-sm" id="nombre" placeholder="Nombre completo">
+                        <div class="row">
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" id="nombre" placeholder="Nombre completo">
                                 <div class="error-text">Solo letras, mín. 3.</div>
                             </div>
-                            <div class="col-12">
-                                <label for="correo" class="visually-hidden">Correo electrónico</label>
-                                <input type="email" class="form-control form-control-sm" id="correo" placeholder="Correo">
+                            <div class="col-md-6 mb-2">
+                                <input type="email" class="form-control" id="correo" placeholder="Correo">
                                 <div class="error-text">Correo inválido.</div>
                             </div>
-                            <div class="col-12">
-                                <label for="pass" class="visually-hidden">Contraseña</label>
-                                <input type="password" class="form-control form-control-sm" id="pass" placeholder="Contraseña (Mayús + Núm)">
+                            <div class="col-md-6 mb-2">
+                                <input type="password" class="form-control" id="pass" placeholder="Contraseña (Mayús + Núm)">
                                 <div class="error-text">Mín. 8, 1 mayús, 1 núm.</div>
                             </div>
-                            <div class="col-12">
-                                <label for="edad" class="visually-hidden">Edad</label>
-                                <input type="text" inputmode="numeric" class="form-control form-control-sm" id="edad" placeholder="Edad (≥18)">
+                            <div class="col-md-6 mb-2">
+                                <input type="text" inputmode="numeric" class="form-control" id="edad" placeholder="Edad (≥18)">
                                 <div class="error-text">Solo números, ≥18.</div>
                             </div>
                         </div>
-                        <div class="form-check my-1">
+                        <div class="form-check mb-3">
                             <input class="form-check-input" type="checkbox" id="terminos">
                             <label class="form-check-label small" for="terminos">Acepto los términos</label>
                             <div class="error-text" id="err-term">Obligatorio.</div>
                         </div>
-                        <button type="submit" class="btn btn-sm w-100 text-white fw-bold btn-enviar">Enviar</button>
-                        <div id="msjExito" class="text-success text-center mt-1 small fw-bold" style="display:none;">¡Enviado con éxito!</div>
+                        <button type="submit" class="btn btn-enviar w-100 text-white fw-bold">Enviar Formulario</button>
+                        <div id="msjExito" class="text-success text-center mt-3 small fw-bold" style="display:none;">¡Enviado con éxito!</div>
                     </form>
                 </section>
 
-            </main><!-- /main -->
-        </div><!-- /pwa-container -->
-
-        <!-- 6. FOOTER -->
-        <footer>
-            <p class="small mb-1">Conectate conmigo</p>
-            <a href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
-            <a href="https://linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-            <a href="https://facebook.com/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-            <span class="small d-block mt-1">2026 UPDS - Diseño Web II</span>
-        </footer>
+            </main>
+        </div>
     </div>
 
-    <!-- Scripts -->
+    <footer>
+        <p class="small mb-2">Conectate conmigo</p>
+        <a href="https://github.com/" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com/" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://facebook.com/" target="_blank"><i class="fab fa-facebook"></i></a>
+        <p class="small mt-3 mb-0">2026 UPDS - Diseño Web II</p>
+    </footer>
+
+    <!-- jQuery (Para la hamburguesa, pestañas y validaciones) -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- Bootstrap JS (Para el carrusel) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Tu JS -->
     <script src="script.js"></script>
 </body>
 </html>
