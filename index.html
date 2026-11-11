@@ -3,147 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#050810">
-    <title>Presentación Personal - Roger Paredes (PWA)</title>
+    <title>Presentación Personal - Roger Paredes (DBL UI)</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Fuente tipo videojuego: Teko y Roboto Condensed -->
+    <!-- Fuentes tipo DBL -->
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@500;700&family=Roboto+Condensed:ital,wght@0,400;0,700;1,700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
 
-    <!-- Fondo de energía (Rayos de fondo) -->
-    <div class="bg-energy"></div>
+    <!-- Fondo del personaje (Puedes cambiar esta URL por la tuya) -->
+    <div class="character-bg" style="background-image: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/84dc13b7-a2ef-41a3-90ce-321e3cc9b8f0/dfa2g3h-56a395a7-385f-46e4-89a4-9c45739c0604.jpg/v1/fill/w_800,h_1200,q_75,strp/goku_black_render_by_dragonballzoffscreen_dfa2g3h-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTIwMCIsInBhdGgiOiJcL2ZcLzg0ZGMxM2I3LWEyZWYtNDFhMy05MGNlLTMyMWUzY2M5YjhmMFwvZGZhMmgzaC01NmEzOTVhNy0zODVmLTQ2ZTQtODlhNC05YzQ1NzM5YzA2MDQuanBnIiwid2lkdGgiOiI8PTgwMCJ9XV0sImF1ZCI6WyJ3d3cudzMub3JnL2NsaWVudGlkIl0sImV4cCI6MTcxODIzNDU2N30.9Vw9bF2nF5m8zN9s2s5s2w2s2s2s2s2s2s');"></div>
+    
+    <!-- Capa oscura para que el texto resalte -->
+    <div class="overlay"></div>
 
     <div class="pwa-wrapper">
-        <div class="pwa-container">
-
-            <!-- HEADER TIPO DBL -->
-            <header class="dbl-header">
-                <div class="player-info">
-                    <div class="avatar-frame">
-                        <i class="fas fa-user text-white"></i>
-                    </div>
-                    <div>
-                        <h2 class="player-name">ROGER PAREDES</h2>
-                        <span class="player-title">Diseñador Web II</span>
-                    </div>
-                </div>
-                <button class="dbl-menu-btn" id="btnHamburguesa">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </header>
-
-            <!-- MENÚ DESPLEGABLE TIPO DBL -->
-            <nav class="dbl-nav" id="navMenu">
-                <div class="nav-btn nav-link-btn" data-target="pasatiempos">
-                    <i class="fas fa-fire"></i> PASATIEMPOS
-                </div>
-                <div class="nav-btn nav-link-btn" data-target="horario">
-                    <i class="fas fa-calendar-alt"></i> HORARIO
-                </div>
-                <div class="nav-btn nav-link-btn" data-target="favoritos">
-                    <i class="fas fa-star"></i> FAVORITOS
-                </div>
-                <div class="nav-btn nav-link-btn" data-target="contacto">
-                    <i class="fas fa-envelope"></i> CONTACTO
-                </div>
-            </nav>
-
-            <!-- VISTAS (CONTENIDO) -->
-            <main class="content-body" id="contentBody">
-                
-                <!-- SECCIÓN: Pasatiempos -->
-                <section id="pasatiempos" class="seccion-contenido activa">
-                    <h2 class="dbl-title">PERFIL DEL GUERRERO</h2>
-                    <div class="dbl-card">
-                        <div class="card-tag">PASATIEMPOS</div>
-                        <p>Videojuegos retro/fútbol, rock clásico, aprender librerías JS.</p>
-                    </div>
-                    <div class="dbl-card mt-3">
-                        <div class="card-tag">INTERESES</div>
-                        <p>Desarrollo web, ciberseguridad, docencia, proyectos socioproductivos.</p>
-                    </div>
-                </section>
-
-                <!-- SECCIÓN: Horario -->
-                <section id="horario" class="seccion-contenido">
-                    <h2 class="dbl-title">MISIONES SEMANALES</h2>
-                    <div class="dbl-card table-responsive">
-                        <table class="table table-sm text-center text-white mb-0">
-                            <thead>
-                                <tr><th>HORA</th><th>LUN</th><th>MAR</th><th>MIÉ</th></tr>
-                            </thead>
-                            <tbody>
-                                <tr><td>07-10</td><td>Diseño Web II</td><td>Base de Datos</td><td>Diseño Web II</td></tr>
-                                <tr><td>10-13</td><td>Libre</td><td>Programación</td><td>Libre</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
-
-                <!-- SECCIÓN: Favoritos -->
-                <section id="favoritos" class="seccion-contenido">
-                    <h2 class="dbl-title">EQUIPAMIENTO</h2>
-                    <div class="dbl-card">
-                        <ul class="nav nav-tabs dbl-tabs" id="myTab" role="tablist">
-                            <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#musica" type="button">Música</button></li>
-                            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#juegos" type="button">Juegos</button></li>
-                        </ul>
-                        <div class="tab-content mt-3">
-                            <div class="tab-pane fade show active" id="musica">
-                                <div class="dbl-item" onclick="alert('Back In Black - AC/DC')">
-                                    <div class="item-icon"><i class="fas fa-music"></i></div>
-                                    <span>Back In Black</span>
-                                </div>
-                                <div class="dbl-item" onclick="alert('Thunderstruck - AC/DC')">
-                                    <div class="item-icon"><i class="fas fa-music"></i></div>
-                                    <span>Thunderstruck</span>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="juegos">
-                                <div class="dbl-item"><div class="item-icon"><i class="fas fa-gamepad"></i></div><span>eFootball</span></div>
-                                <div class="dbl-item"><div class="item-icon"><i class="fas fa-gamepad"></i></div><span>Pokemon Radical Red</span></div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- SECCIÓN: Contacto -->
-                <section id="contacto" class="seccion-contenido">
-                    <h2 class="dbl-title">TRANSMISIÓN</h2>
-                    <form id="formulario" novalidate class="dbl-card">
-                        <div class="mb-2">
-                            <input type="text" class="dbl-input" id="nombre" placeholder="Nombre de Guerrero">
-                            <div class="error-text">Solo letras, mín. 3.</div>
-                        </div>
-                        <div class="mb-2">
-                            <input type="email" class="dbl-input" id="correo" placeholder="Correo Electrónico">
-                            <div class="error-text">Correo inválido.</div>
-                        </div>
-                        <div class="mb-2">
-                            <input type="password" class="dbl-input" id="pass" placeholder="Contraseña (Mayús + Núm)">
-                            <div class="error-text">Mín. 8, 1 mayús, 1 núm.</div>
-                        </div>
-                        <div class="mb-2">
-                            <input type="text" inputmode="numeric" class="dbl-input" id="edad" placeholder="Edad (≥18)">
-                            <div class="error-text">Solo números, ≥18.</div>
-                        </div>
-                        <div class="form-check mb-3 mt-3">
-                            <input class="form-check-input" type="checkbox" id="terminos">
-                            <label class="form-check-label small text-white" for="terminos">Acepto los términos</label>
-                            <div class="error-text" id="err-term">Obligatorio.</div>
-                        </div>
-                        <button type="submit" class="dbl-submit-btn">ENVIAR TRANSMISIÓN</button>
-                        <div id="msjExito" class="text-success text-center mt-3 fw-bold" style="display:none;">¡Mensaje enviado!</div>
-                    </form>
-                </section>
-
-            </main>
+        
+        <!-- BARRA SUPERIOR DE ESTADOS (Como en la imagen) -->
+        <div class="top-stats">
+            <div class="stat-bar red">MODO ESTÁTICO: <span id="statusText">ON</span></div>
+            <div class="stat-bar green">HIDRATACIÓN: <span id="hydrateText">PENDIENTE</span></div>
+            <div class="stat-bar dark">PWA v1.0 - ROGER PAREDES</div>
         </div>
+
+        <!-- BOTONES LATERALES DERECHOS -->
+        <div class="side-menu">
+            <div class="menu-btn" data-target="pasatiempos">
+                <div class="icon-bg bg-yellow"><i class="fas fa-fire"></i></div>
+                <span>Pasatiempos</span>
+            </div>
+            <div class="menu-btn" data-target="horario">
+                <div class="icon-bg bg-cyan"><i class="fas fa-calendar-alt"></i></div>
+                <span>Horario</span>
+            </div>
+            <div class="menu-btn" data-target="favoritos">
+                <div class="icon-bg bg-orange"><i class="fas fa-star"></i></div>
+                <span>Favoritos</span>
+            </div>
+            <div class="menu-btn" data-target="contacto">
+                <div class="icon-bg bg-blue"><i class="fas fa-envelope"></i></div>
+                <span>Contacto</span>
+            </div>
+        </div>
+
+        <!-- CAJA DE DIÁLOGO / CONTENIDO CENTRAL -->
+        <div class="dialog-box-container">
+            <div class="dialog-avatar">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="dialog-box" id="dialogBox">
+                <h3 id="dialogTitle">Contenido Recomendado</h3>
+                <p id="dialogText">¡Bienvenido! Haz clic en cualquier botón del menú lateral para ver mi información, o interactúa con la página para hidratar el sistema.</p>
+            </div>
+        </div>
+
+        <!-- TARJETAS INFERIORES (Info detallada) -->
+        <div class="bottom-cards" id="cardsContainer">
+            <!-- Aquí se inyecta el contenido dinámico -->
+            
+            <!-- Tarjeta por defecto -->
+            <div class="dbl-event-card active" id="pasatiempos">
+                <div class="card-header-top">Experiencia x2</div>
+                <div class="card-image" style="background-color: #3b82f6;">
+                    <i class="fas fa-gamepad"></i>
+                </div>
+                <div class="card-content">
+                    <h4>Pasatiempos</h4>
+                    <p>Videojuegos, rock clásico y JS.</p>
+                    <div class="card-footer">
+                        <span>Intereses: Desarrollo Web y Ciberseguridad</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tarjeta Horario -->
+            <div class="dbl-event-card" id="horario">
+                <div class="card-header-top">Eventos Zeni x2</div>
+                <div class="card-image" style="background-color: #10b981;">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="card-content">
+                    <h4>Horario</h4>
+                    <table class="table table-sm text-white mb-0 mt-2">
+                        <tr><td>07-10</td><td>Diseño Web II</td></tr>
+                        <tr><td>10-13</td><td>Programación</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tarjeta Favoritos -->
+            <div class="dbl-event-card" id="favoritos">
+                <div class="card-header-top">¡Entrenamiento!</div>
+                <div class="card-image" style="background-color: #f59e0b;">
+                    <i class="fas fa-music"></i>
+                </div>
+                <div class="card-content">
+                    <h4>Favoritos</h4>
+                    <p class="mb-1"><i class="fas fa-play-circle text-warning"></i> AC/DC - Back In Black</p>
+                    <p class="mb-1"><i class="fas fa-play-circle text-warning"></i> eFootball</p>
+                </div>
+            </div>
+
+            <!-- Tarjeta Contacto -->
+            <div class="dbl-event-card" id="contacto">
+                <div class="card-header-top">¡Únete a la Liga!</div>
+                <div class="card-image" style="background-color: #ef4444;">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="card-content">
+                    <h4>Contacto</h4>
+                    <form id="formulario" novalidate>
+                        <input type="text" class="dbl-input mb-1" id="nombre" placeholder="Nombre">
+                        <div class="error-text">Mín. 3 letras.</div>
+                        <input type="email" class="dbl-input mb-1" id="correo" placeholder="Correo">
+                        <div class="error-text">Inválido.</div>
+                        <button type="submit" class="dbl-btn-submit">Enviar</button>
+                        <div id="msjExito" style="display:none; color:#4ade80; font-weight:bold;">¡Enviado!</div>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- BOTÓN DE MENÚ INFERIOR DERECHO -->
+        <div class="bottom-right-menu" id="btnHamburguesa">
+            <div class="menu-star"><i class="fas fa-bars"></i></div>
+            <span>MENÚ</span>
+        </div>
+
+        <!-- PANEL DE MENÚ HAMBURGUESA (Oculto por defecto, se abre con el botón MENÚ) -->
+        <nav class="dbl-nav-overlay" id="navMenu">
+            <div class="close-btn" id="closeMenu"><i class="fas fa-times"></i></div>
+            <div class="nav-content">
+                <h2>OPCIONES</h2>
+                <div class="dbl-nav-item nav-link-btn" data-target="pasatiempos">Pasatiempos</div>
+                <div class="dbl-nav-item nav-link-btn" data-target="horario">Horario</div>
+                <div class="dbl-nav-item nav-link-btn" data-target="favoritos">Favoritos</div>
+                <div class="dbl-nav-item nav-link-btn" data-target="contacto">Contacto</div>
+            </div>
+        </nav>
+
     </div>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
