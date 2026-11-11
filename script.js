@@ -2,38 +2,43 @@ $(document).ready(function() {
 
     let paginaHidratada = false;
 
+    // ==========================================
+    // HIDRATACIÓN AL PRIMER CLIC (Y actualización visual)
+    // ==========================================
     function hidratarPagina() {
         if (paginaHidratada) return;
         paginaHidratada = true;
 
-        // Efecto visual de hidratación
-        $('.pwa-container').css('box-shadow', '0 0 50px rgba(0, 229, 255, 0.6)');
+        // Cambiamos los textos de las barras de estado
+        $('#statusText').text('OFF').css('color', '#4ade80');
+        $('#hydrateText').text('COMPLETADA').css('color', '#4ade80');
+        
+        // Actualizamos el diálogo
+        $('#dialogTitle').text('Sistema Listo');
+        $('#dialogText').text('Interfaz hidratada correctamente. Ya puedes usar los botones laterales o el menú de la estrella.');
 
-        // 1. Eventos de la Hamburguesa
-        $('#btnHamburguesa').off('click').on('click', function() {
-            $('#navMenu').slideToggle('fast');
-        });
-
-        // 2. Eventos de las Pestañas (Pasatiempos, Horario, etc.)
-        $('.nav-link-btn').off('click').on('click', function(e) {
-            e.preventDefault();
+        // 1. Eventos de los botones laterales (Píldoras)
+        $('.menu-btn').off('click').on('click', function() {
             let target = $(this).data('target');
-            
-            $('#navMenu').slideUp('fast');
-
-            $('.seccion-contenido.activa').fadeOut(200, function() {
-                $(this).removeClass('activa');
-                $('#' + target).fadeIn(300).addClass('activa');
-            });
+            cambiarSeccion(target);
         });
 
-        // 3. Validación de Edad
-        $('#edad').off('input').on('input', function () {
-            this.value = this.value.replace(/[^0-9]/g, '');
+        // 2. Eventos del menú inferior (Estrella)
+        $('#btnHamburguesa').off('click').on('click', function() {
+            $('#navMenu').addClass('show');
         });
 
-        // 4. Validación del Formulario
-        $('#formulario').off('submit').on('submit', function (e) {
+        // 3. Cerrar menú
+        $('#closeMenu, .dbl-nav-item').off('click').on('click', function(e) {
+            if ($(this).hasClass('dbl-nav-item')) {
+                let target = $(this).data('target');
+                cambiarSeccion(target);
+            }
+            $('#navMenu').removeClass('show');
+        });
+
+        // 4. Validaciones del formulario
+        $('#formulario').off('submit').on('submit', function(e) {
             e.preventDefault();
             let isValid = true;
 
@@ -45,18 +50,6 @@ $(document).ready(function() {
             if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo.val())) { correo.addClass('is-invalid'); isValid = false; }
             else correo.removeClass('is-invalid');
 
-            const pass = $('#pass');
-            if (!/^(?=.*[A-Z])(?=.*\d).{8,}$/.test(pass.val())) { pass.addClass('is-invalid'); isValid = false; }
-            else pass.removeClass('is-invalid');
-
-            const edad = $('#edad');
-            if (edad.val() === '' || Number(edad.val()) < 18) { edad.addClass('is-invalid'); isValid = false; }
-            else edad.removeClass('is-invalid');
-
-            const terminos = $('#terminos');
-            if (!terminos.is(':checked')) { $('#err-term').show(); isValid = false; }
-            else $('#err-term').hide();
-
             if (isValid) {
                 $('#msjExito').fadeIn(200);
                 this.reset();
@@ -65,10 +58,18 @@ $(document).ready(function() {
         });
     }
 
-    // Disparadores de Hidratación (Clic, Toque, Teclado o 1.5s)
+    // Función para cambiar la tarjeta visible
+    function cambiarSeccion(target) {
+        $('.dbl-event-card').removeClass('active');
+        $('#' + target).addClass('active');
+    }
+
+    // Disparadores de hidratación (cualquier toque o clic)
     $(document).one('click touchstart keydown', function() {
         hidratarPagina();
     });
-    setTimeout(hidratarPagina, 1500);
+    
+    // Auto-hidratación a los 2 segundos por si acaso
+    setTimeout(hidratarPagina, 2000);
 
 });
