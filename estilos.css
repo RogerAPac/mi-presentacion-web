@@ -1,174 +1,242 @@
 :root {
-    --dbl-bg: #050810;
-    --dbl-panel: #111827;
+    --dbl-yellow: #ffd700;
     --dbl-cyan: #00e5ff;
     --dbl-orange: #ff6a00;
-    --dbl-yellow: #ffcc00;
-    --dbl-text: #ffffff;
+    --dbl-blue: #2563eb;
+    --dbl-red: #dc2626;
+    --dbl-panel: rgba(15, 23, 42, 0.85); /* Fondo semitransparente para ver al personaje */
 }
 
 body {
     font-family: 'Roboto Condensed', sans-serif;
-    background-color: var(--dbl-bg);
-    color: var(--dbl-text);
+    background-color: #000;
+    color: #fff;
     margin: 0;
-    padding: 20px 10px;
-    overflow-x: hidden;
+    padding: 0;
+    overflow: hidden; /* Evita scroll general */
+    height: 100vh;
 }
 
-/* FONDO DE ENERGÍA (Efecto radial de rayos) */
-.bg-energy {
+/* FONDO DEL PERSONAJE */
+.character-bg {
     position: fixed;
-    top: 0; left: 0; width: 100vw; height: 100vh;
-    background: radial-gradient(circle at 50% 50%, #1a2a44 0%, #050810 80%);
-    z-index: -1;
+    top: 0; left: 0; width: 100%; height: 100vh;
+    background-size: cover;
+    background-position: center top;
+    z-index: 1;
 }
-.bg-energy::after {
-    content: '';
-    position: absolute;
-    top: -50%; left: -50%; width: 200%; height: 200%;
-    background-image: repeating-conic-gradient(from 0deg, transparent 0deg, transparent 15deg, rgba(0, 229, 255, 0.03) 15deg, rgba(0, 229, 255, 0.03) 30deg);
-    animation: rotateRays 60s linear infinite;
+
+/* CAPA OSCURA (Degradado para que resalte la UI) */
+.overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100vh;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 100%);
+    z-index: 2;
 }
-@keyframes rotateRays { 100% { transform: rotate(360deg); } }
 
-.pwa-wrapper { max-width: 100%; margin: 0 auto; }
-
-/* CONTENEDOR PRINCIPAL TIPO UI DE JUEGO */
-.pwa-container {
-    max-width: 800px;
+/* CONTENEDOR PRINCIPAL (Simula pantalla de celular en PC) */
+.pwa-wrapper {
+    position: relative;
+    z-index: 10;
+    max-width: 480px;
+    height: 100vh;
     margin: 0 auto;
-    background: var(--dbl-panel);
-    /* Recorte de esquinas (biselado) */
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
-    box-shadow: 0 0 30px rgba(0, 229, 255, 0.2);
     display: flex;
     flex-direction: column;
-    min-height: 80vh;
-    border-top: 3px solid var(--dbl-cyan);
+    justify-content: space-between;
+    padding: 10px;
 }
 
 @media (max-width: 768px) {
-    body { padding: 0; }
-    .pwa-container { max-width: 100%; min-height: 100vh; }
+    .pwa-wrapper { max-width: 100%; }
 }
 
-/* HEADER TIPO DBL */
-.dbl-header {
-    background: linear-gradient(90deg, #000 0%, #1a2a44 100%);
-    padding: 15px 20px;
+/* 1. BARRA SUPERIOR DE ESTADOS */
+.top-stats {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 2px solid var(--dbl-cyan);
+    flex-direction: column;
+    gap: 5px;
+    width: 70%;
 }
-.player-info { display: flex; align-items: center; gap: 15px; }
-.avatar-frame {
-    width: 45px; height: 45px;
-    background: #000;
-    border: 2px solid var(--dbl-cyan);
+.stat-bar {
+    padding: 4px 10px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    clip-path: polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+}
+.red { background: linear-gradient(90deg, #7f1d1d, #dc2626); }
+.green { background: linear-gradient(90deg, #14532d, #22c55e); }
+.dark { background: linear-gradient(90deg, #0f172a, #1e293b); }
+
+/* 2. BOTONES LATERALES (Menú derecho) */
+.side-menu {
+    position: absolute;
+    top: 80px;
+    right: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.menu-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.menu-btn:hover { transform: scale(1.1); }
+.icon-bg {
+    width: 50px; height: 50px;
     border-radius: 50%;
     display: flex; justify-content: center; align-items: center;
-    box-shadow: 0 0 10px var(--dbl-cyan);
+    font-size: 22px; color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.8), inset 0 0 10px rgba(255,255,255,0.5);
+    border: 2px solid #fff;
+    margin-bottom: 2px;
 }
-.player-name {
+.menu-btn span {
     font-family: 'Teko', sans-serif;
-    font-size: 26px; margin: 0; line-height: 1;
-    text-shadow: 2px 2px 0px #000, 0 0 10px var(--dbl-cyan);
-    letter-spacing: 1px;
+    font-size: 14px; background: rgba(0,0,0,0.7);
+    padding: 1px 8px; border-radius: 10px;
 }
-.player-title { font-size: 12px; color: #94a3b8; text-transform: uppercase; font-weight: 700; }
+.bg-yellow { background: radial-gradient(circle, #fde047, #ca8a04); }
+.bg-cyan { background: radial-gradient(circle, #67e8f9, #0891b2); }
+.bg-orange { background: radial-gradient(circle, #fdba74, #ea580c); }
+.bg-blue { background: radial-gradient(circle, #93c5fd, #2563eb); }
 
-.dbl-menu-btn {
-    background: transparent; border: none; color: #fff; font-size: 24px; cursor: pointer;
-    transition: transform 0.2s, color 0.2s;
+/* 3. CAJA DE DIÁLOGO (Centro) */
+.dialog-box-container {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    right: 80px; /* Deja espacio para el menú lateral */
+    transform: translateY(-50%);
+    display: flex;
+    align-items: flex-end;
 }
-.dbl-menu-btn:hover { color: var(--dbl-orange); transform: scale(1.1); }
+.dialog-avatar {
+    width: 40px; height: 40px; background: #2563eb; border: 2px solid #fff;
+    border-radius: 50%; display: flex; justify-content: center; align-items: center;
+    font-size: 20px; z-index: 2; margin-right: -10px;
+}
+.dialog-box {
+    background: #f8fafc; color: #0f172a; padding: 10px 15px;
+    border-radius: 8px; border: 2px solid #000;
+    box-shadow: 4px 4px 0px rgba(0,0,0,0.5);
+    flex-grow: 1;
+}
+.dialog-box h3 { margin: 0 0 5px 0; font-family: 'Teko', sans-serif; font-size: 20px; color: #1e293b; line-height: 1; }
+.dialog-box p { margin: 0; font-size: 12px; line-height: 1.2; font-weight: 600; }
 
-/* MENÚ DESPLEGABLE TIPO DBL */
-.dbl-nav { display: none; background: #0f172a; padding: 10px; border-bottom: 2px solid var(--dbl-orange); }
-.nav-btn {
-    background: linear-gradient(90deg, #1e293b, transparent);
-    padding: 12px 20px; margin-bottom: 8px; font-size: 16px; font-weight: 700;
-    text-transform: uppercase; cursor: pointer; letter-spacing: 1px;
-    /* Botones en ángulo */
-    clip-path: polygon(10px 0, 100% 0, 100% 100%, 0 100%);
-    border-left: 4px solid var(--dbl-cyan);
+/* 4. TARJETAS INFERIORES (Horizontal Scroll) */
+.bottom-cards {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    margin-top: auto; /* Empuja hacia abajo */
+    scrollbar-width: none; /* Firefox */
+}
+.bottom-cards::-webkit-scrollbar { display: none; } /* Chrome */
+
+.dbl-event-card {
+    min-width: 140px;
+    background: #111827;
+    border: 2px solid #374151;
+    border-radius: 4px;
+    overflow: hidden;
+    display: none; /* Ocultas por defecto */
+    flex-direction: column;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.8);
+}
+.dbl-event-card.active { display: flex; animation: popIn 0.3s ease-out; }
+@keyframes popIn { 0% { transform: scale(0.9); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+
+.card-header-top {
+    background: #ffcc00; color: #000; text-align: center;
+    font-size: 10px; font-weight: 700; padding: 2px;
+    text-transform: uppercase;
+}
+.card-image {
+    height: 60px; display: flex; justify-content: center; align-items: center;
+    font-size: 30px; color: #fff;
+    border-bottom: 2px solid #000;
+}
+.card-content {
+    padding: 8px; display: flex; flex-direction: column; flex-grow: 1;
+}
+.card-content h4 {
+    font-family: 'Teko', sans-serif; font-size: 18px; margin: 0 0 5px 0;
+    color: #fff; line-height: 1;
+}
+.card-content p { font-size: 11px; margin: 0; color: #cbd5e1; }
+.card-footer {
+    background: #000; padding: 4px; text-align: center;
+    font-size: 9px; color: #94a3b8; margin-top: auto;
+}
+
+/* 5. BOTÓN MENÚ INFERIOR DERECHO */
+.bottom-right-menu {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    z-index: 20;
+}
+.menu-star {
+    width: 60px; height: 60px;
+    background: radial-gradient(circle, #60a5fa, #1d4ed8);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    display: flex; justify-content: center; align-items: center;
+    font-size: 24px; color: #fff;
+    filter: drop-shadow(0 0 10px #1d4ed8);
+    transition: transform 0.2s;
+}
+.bottom-right-menu:hover .menu-star { transform: rotate(20deg) scale(1.1); }
+.bottom-right-menu span {
+    font-family: 'Teko', sans-serif; font-size: 18px; font-weight: 700;
+    text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    margin-top: -5px;
+}
+
+/* 6. PANEL HAMBURGUESA (Overlay oscuro) */
+.dbl-nav-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100vh;
+    background: rgba(0,0,0,0.9);
+    z-index: 100;
+    display: none;
+    justify-content: center; align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.dbl-nav-overlay.show { display: flex; opacity: 1; }
+.nav-content {
+    background: #1e293b; width: 80%; max-width: 300px; padding: 20px;
+    border: 2px solid var(--dbl-cyan); border-radius: 10px;
+    text-align: center; box-shadow: 0 0 30px rgba(0, 229, 255, 0.3);
+}
+.nav-content h2 { font-family: 'Teko', sans-serif; font-size: 30px; color: var(--dbl-yellow); margin-bottom: 15px; }
+.dbl-nav-item {
+    background: #0f172a; padding: 12px; margin-bottom: 10px; font-size: 16px; font-weight: 700;
+    text-transform: uppercase; cursor: pointer; border-left: 4px solid var(--dbl-cyan);
     transition: all 0.2s;
 }
-.nav-btn:hover {
-    background: linear-gradient(90deg, var(--dbl-cyan), transparent);
-    color: #000; border-left: 4px solid var(--dbl-orange);
-    transform: translateX(5px);
-}
+.dbl-nav-item:hover { background: var(--dbl-cyan); color: #000; }
+.close-btn { position: absolute; top: 20px; right: 20px; font-size: 30px; color: #fff; cursor: pointer; }
 
-/* TÍTULOS DE SECCIÓN */
-.content-body { padding: 20px; flex-grow: 1; }
-.seccion-contenido { display: none; }
-.seccion-contenido.activa { display: block; animation: dblEnter 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-
-@keyframes dblEnter {
-    0% { opacity: 0; transform: translateX(-20px); }
-    100% { opacity: 1; transform: translateX(0); }
-}
-
-.dbl-title {
-    font-family: 'Teko', sans-serif;
-    font-size: 28px; color: #fff; margin-bottom: 15px;
-    text-shadow: 2px 2px 0px var(--dbl-orange), 0 0 15px rgba(255,106,0,0.5);
-    letter-spacing: 1px;
-}
-
-/* TARJETAS TIPO DBL */
-.dbl-card {
-    background: rgba(17, 24, 39, 0.8);
-    border: 1px solid rgba(0, 229, 255, 0.3);
-    padding: 15px;
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
-    box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
-    position: relative;
-}
-.dbl-card p { margin: 0; font-size: 15px; color: #e2e8f0; line-height: 1.4; }
-.card-tag {
-    font-family: 'Teko', sans-serif; font-size: 20px; color: var(--dbl-cyan);
-    border-bottom: 1px solid var(--dbl-cyan); margin-bottom: 8px; display: inline-block;
-}
-
-/* TABLAS Y LISTAS */
-.table { color: #fff; }
-.table th { background: rgba(0, 229, 255, 0.1); color: var(--dbl-cyan); border-color: #334155; }
-.table td { border-color: #334155; }
-
-.dbl-tabs .nav-link { color: #94a3b8; font-family: 'Teko', sans-serif; font-size: 22px; padding: 5px 15px; border: none; }
-.dbl-tabs .nav-link.active { color: var(--dbl-orange); background: transparent; border-bottom: 3px solid var(--dbl-orange); text-shadow: 0 0 10px var(--dbl-orange); }
-
-.dbl-item {
-    display: flex; align-items: center; gap: 15px;
-    background: linear-gradient(90deg, #1e293b, transparent);
-    padding: 10px; margin-bottom: 10px;
-    border-left: 3px solid var(--dbl-cyan); cursor: pointer;
-    transition: all 0.2s;
-}
-.dbl-item:hover { background: linear-gradient(90deg, rgba(0, 229, 255, 0.2), transparent); transform: scale(1.02); }
-.item-icon { color: var(--dbl-cyan); font-size: 20px; width: 30px; text-align: center; }
-
-/* FORMULARIO E INPUTS */
+/* FORMULARIO EN TARJETA */
 .dbl-input {
-    width: 100%; background: #0f172a; border: 1px solid #334155; color: #fff;
-    padding: 10px; font-size: 15px;
-    clip-path: polygon(10px 0, 100% 0, 100% 100%, 0 100%);
+    width: 100%; background: #000; border: 1px solid #374151; color: #fff;
+    padding: 5px; font-size: 12px;
 }
-.dbl-input:focus { outline: none; border-color: var(--dbl-cyan); box-shadow: 0 0 10px var(--dbl-cyan); }
-.error-text { color: #ef4444; font-size: 12px; display: none; margin-top: 2px; font-weight: bold; }
+.error-text { color: #ef4444; font-size: 9px; display: none; }
 .is-invalid + .error-text { display: block; }
-.is-invalid { border-color: #ef4444 !important; }
-
-.dbl-submit-btn {
-    width: 100%; padding: 12px;
-    background: linear-gradient(90deg, var(--dbl-orange), var(--dbl-yellow));
-    border: none; color: #000; font-family: 'Teko', sans-serif; font-size: 24px; font-weight: 700;
-    clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
-    cursor: pointer; transition: all 0.2s;
-    box-shadow: 0 0 15px rgba(255,106,0,0.5);
+.dbl-btn-submit {
+    width: 100%; background: var(--dbl-yellow); color: #000; border: none;
+    font-weight: bold; padding: 5px; font-size: 12px; margin-top: 5px;
 }
-.dbl-submit-btn:hover { transform: scale(1.02); box-shadow: 0 0 25px rgba(255,106,0,0.8); }
