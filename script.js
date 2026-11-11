@@ -1,34 +1,20 @@
 $(document).ready(function() {
 
-    $('#btnHidratar').off('click').on('click', function() {
-        let $box = $('#contenedorMenu');
-        let $btn = $(this);
-        
-        // Validar que no se hidrate dos veces
-        if ($box.attr('data-hidratado') === 'true') return;
+    let paginaHidratada = false;
 
-        // 1. Cambiar el fondo del contenedor a verde claro
-        $box.css({'background-color': '#dcfce7', 'border-color': '#22c55e'});
+    function hidratarPagina() {
+        if (paginaHidratada) return;
+        paginaHidratada = true;
 
-        // 2. Cambiar el texto de arriba y mostrar el mensaje de "Página hidratada"
-        $('#textoEstatico').hide();
-        $('#msjHidratacion').fadeIn(200);
+        // Efecto visual de hidratación
+        $('.pwa-container').css('box-shadow', '0 0 50px rgba(0, 229, 255, 0.6)');
 
-        // 3. Deshabilitar el botón y ponerlo verde (para que quede constancia de que funcionó)
-        $btn.prop('disabled', true)
-            .removeClass('btn-warning')
-            .addClass('btn-success')
-            .html('<i class="fas fa-check"></i> Hidratado');
-
-        // 4. Hidratar el ícono de la hamburguesa
-        $('#hamburgerIcon').css('color', 'var(--accent)');
-
-        // 5. Adjuntar los eventos interactivos (Hamburguesa)
+        // 1. Eventos de la Hamburguesa
         $('#btnHamburguesa').off('click').on('click', function() {
             $('#navMenu').slideToggle('fast');
         });
 
-        // 6. Eventos interactivos (Pestañas)
+        // 2. Eventos de las Pestañas (Pasatiempos, Horario, etc.)
         $('.nav-link-btn').off('click').on('click', function(e) {
             e.preventDefault();
             let target = $(this).data('target');
@@ -37,15 +23,16 @@ $(document).ready(function() {
 
             $('.seccion-contenido.activa').fadeOut(200, function() {
                 $(this).removeClass('activa');
-                $('#' + target).fadeIn(200).addClass('activa');
+                $('#' + target).fadeIn(300).addClass('activa');
             });
         });
 
-        // 7. Eventos del formulario
+        // 3. Validación de Edad
         $('#edad').off('input').on('input', function () {
             this.value = this.value.replace(/[^0-9]/g, '');
         });
 
+        // 4. Validación del Formulario
         $('#formulario').off('submit').on('submit', function (e) {
             e.preventDefault();
             let isValid = true;
@@ -76,9 +63,12 @@ $(document).ready(function() {
                 setTimeout(() => { $('#msjExito').fadeOut(200); }, 3000);
             }
         });
+    }
 
-        // 8. Marcar como hidratado
-        $box.attr('data-hidratado', 'true');
+    // Disparadores de Hidratación (Clic, Toque, Teclado o 1.5s)
+    $(document).one('click touchstart keydown', function() {
+        hidratarPagina();
     });
+    setTimeout(hidratarPagina, 1500);
 
 });
