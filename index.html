@@ -5,86 +5,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Presentación Personal - Roger Paredes (DBL UI)</title>
     
+    <!-- Tree Shaking: Solo Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Fuentes tipo DBL -->
-    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@500;700&family=Roboto+Condensed:ital,wght@0,400;0,700;1,700&display=swap" rel="stylesheet">
+    
+    <!-- DOMPurify (Seguridad XSS) -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
     
     <link rel="stylesheet" href="estilos.css">
+    
+    <!-- Armadura PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#050810">
 </head>
 <body>
-    <div class="character-bg" style="background-image: url('data:image/jpeg;base64,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');"></div>
+    <!-- Fondo del personaje controlado desde CSS -->
+    <div class="dbl-bg"></div>
+    <div class="dbl-overlay"></div>
 
-    <!-- Capa oscura para que el texto resalte -->
-    <div class="overlay"></div>
-
-    <div class="pwa-wrapper">
+    <div class="dbl-wrapper">
         
-        <!-- BARRA SUPERIOR DE ESTADOS (Como en la imagen) -->
-        <div class="top-stats">
-            <div class="stat-bar red">MODO ESTÁTICO: <span id="statusText">ON</span></div>
-            <div class="stat-bar green">HIDRATACIÓN: <span id="hydrateText">PENDIENTE</span></div>
-            <div class="stat-bar dark">PWA v1.0 - ROGER PAREDES</div>
+        <!-- BARRA SUPERIOR (BEM) -->
+        <div class="dbl-stats">
+            <div class="dbl-stats__bar dbl-stats__bar--red">MODO ESTÁTICO: <span id="statusText">ON</span></div>
+            <div class="dbl-stats__bar dbl-stats__bar--green">HIDRATACIÓN: <span id="hydrateText">PENDIENTE</span></div>
+            <div class="dbl-stats__bar dbl-stats__bar--dark">PWA v2.0 - ROGER PAREDES</div>
         </div>
 
-        <!-- BOTONES LATERALES DERECHOS -->
-        <div class="side-menu">
-            <div class="menu-btn" data-target="pasatiempos">
-                <div class="icon-bg bg-yellow"><i class="fas fa-fire"></i></div>
-                <span>Pasatiempos</span>
+        <!-- MENÚ LATERAL DERECHO (BEM) -->
+        <div class="dbl-sidemenu">
+            <div class="dbl-sidemenu__item" data-target="pasatiempos">
+                <div class="dbl-sidemenu__icon dbl-sidemenu__icon--yellow">🎮</div>
+                <span class="dbl-sidemenu__text">Pasatiempos</span>
             </div>
-            <div class="menu-btn" data-target="horario">
-                <div class="icon-bg bg-cyan"><i class="fas fa-calendar-alt"></i></div>
-                <span>Horario</span>
+            <div class="dbl-sidemenu__item" data-target="horario">
+                <div class="dbl-sidemenu__icon dbl-sidemenu__icon--cyan">📅</div>
+                <span class="dbl-sidemenu__text">Horario</span>
             </div>
-            <div class="menu-btn" data-target="favoritos">
-                <div class="icon-bg bg-orange"><i class="fas fa-star"></i></div>
-                <span>Favoritos</span>
+            <div class="dbl-sidemenu__item" data-target="favoritos">
+                <div class="dbl-sidemenu__icon dbl-sidemenu__icon--orange">⭐</div>
+                <span class="dbl-sidemenu__text">Favoritos</span>
             </div>
-            <div class="menu-btn" data-target="contacto">
-                <div class="icon-bg bg-blue"><i class="fas fa-envelope"></i></div>
-                <span>Contacto</span>
-            </div>
-        </div>
-
-        <!-- CAJA DE DIÁLOGO / CONTENIDO CENTRAL -->
-        <div class="dialog-box-container">
-            <div class="dialog-avatar">
-                <i class="fas fa-user"></i>
-            </div>
-            <div class="dialog-box" id="dialogBox">
-                <h3 id="dialogTitle">Contenido Recomendado</h3>
-                <p id="dialogText">¡Bienvenido! Haz clic en cualquier botón del menú lateral para ver mi información, o interactúa con la página para hidratar el sistema.</p>
+            <div class="dbl-sidemenu__item" data-target="contacto">
+                <div class="dbl-sidemenu__icon dbl-sidemenu__icon--blue">✉️</div>
+                <span class="dbl-sidemenu__text">Contacto</span>
             </div>
         </div>
 
-        <!-- TARJETAS INFERIORES (Info detallada) -->
-        <div class="bottom-cards" id="cardsContainer">
-            <!-- Aquí se inyecta el contenido dinámico -->
+        <!-- CAJA DE DIÁLOGO (BEM) -->
+        <div class="dbl-dialog">
+            <div class="dbl-dialog__avatar">👤</div>
+            <div class="dbl-dialog__box" id="dialogBox">
+                <h3 class="dbl-dialog__title" id="dialogTitle">Contenido Recomendado</h3>
+                <p class="dbl-dialog__text" id="dialogText">¡Bienvenido! Haz clic en cualquier botón del menú lateral para ver mi información, o interactúa con la página para hidratar el sistema.</p>
+            </div>
+        </div>
+
+        <!-- TARJETAS INFERIORES (BEM) -->
+        <div class="dbl-cards">
             
-            <!-- Tarjeta por defecto -->
-            <div class="dbl-event-card active" id="pasatiempos">
-                <div class="card-header-top">Experiencia x2</div>
-                <div class="card-image" style="background-color: #3b82f6;">
-                    <i class="fas fa-gamepad"></i>
-                </div>
-                <div class="card-content">
-                    <h4>Pasatiempos</h4>
-                    <p>Videojuegos, rock clásico y JS.</p>
-                    <div class="card-footer">
+            <div class="dbl-card dbl-card--active" id="pasatiempos">
+                <div class="dbl-card__header dbl-card__header--yellow">Experiencia x2</div>
+                <div class="dbl-card__image dbl-card__image--blue">🎮</div>
+                <div class="dbl-card__body">
+                    <h4 class="dbl-card__title">Pasatiempos</h4>
+                    <p class="dbl-card__text">Videojuegos, rock clásico y JS.</p>
+                    <div class="dbl-card__footer">
                         <span>Intereses: Desarrollo Web y Ciberseguridad</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Tarjeta Horario -->
-            <div class="dbl-event-card" id="horario">
-                <div class="card-header-top">Eventos Zeni x2</div>
-                <div class="card-image" style="background-color: #10b981;">
-                    <i class="fas fa-clock"></i>
-                </div>
-                <div class="card-content">
-                    <h4>Horario</h4>
+            <div class="dbl-card" id="horario">
+                <div class="dbl-card__header dbl-card__header--green">Eventos Zeni x2</div>
+                <div class="dbl-card__image dbl-card__image--green">🕒</div>
+                <div class="dbl-card__body">
+                    <h4 class="dbl-card__title">Horario</h4>
                     <table class="table table-sm text-white mb-0 mt-2">
                         <tr><td>07-10</td><td>Diseño Web II</td></tr>
                         <tr><td>10-13</td><td>Programación</td></tr>
@@ -92,62 +87,66 @@
                 </div>
             </div>
 
-            <!-- Tarjeta Favoritos -->
-            <div class="dbl-event-card" id="favoritos">
-                <div class="card-header-top">¡Entrenamiento!</div>
-                <div class="card-image" style="background-color: #f59e0b;">
-                    <i class="fas fa-music"></i>
-                </div>
-                <div class="card-content">
-                    <h4>Favoritos</h4>
-                    <p class="mb-1"><i class="fas fa-play-circle text-warning"></i> AC/DC - Back In Black</p>
-                    <p class="mb-1"><i class="fas fa-play-circle text-warning"></i> eFootball</p>
+            <div class="dbl-card" id="favoritos">
+                <div class="dbl-card__header dbl-card__header--orange">¡Entrenamiento!</div>
+                <div class="dbl-card__image dbl-card__image--orange">🎵</div>
+                <div class="dbl-card__body">
+                    <h4 class="dbl-card__title">Favoritos</h4>
+                    <p class="dbl-card__text mb-1">▶️ AC/DC - Back In Black</p>
+                    <p class="dbl-card__text mb-1">▶️ eFootball</p>
                 </div>
             </div>
 
-            <!-- Tarjeta Contacto -->
-            <div class="dbl-event-card" id="contacto">
-                <div class="card-header-top">¡Únete a la Liga!</div>
-                <div class="card-image" style="background-color: #ef4444;">
-                    <i class="fas fa-envelope"></i>
-                </div>
-                <div class="card-content">
-                    <h4>Contacto</h4>
+            <div class="dbl-card" id="contacto">
+                <div class="dbl-card__header dbl-card__header--red">¡Únete a la Liga!</div>
+                <div class="dbl-card__image dbl-card__image--red">✉️</div>
+                <div class="dbl-card__body">
+                    <h4 class="dbl-card__title">Contacto</h4>
                     <form id="formulario" novalidate>
                         <input type="text" class="dbl-input mb-1" id="nombre" placeholder="Nombre">
-                        <div class="error-text">Mín. 3 letras.</div>
+                        <div class="dbl-error">Mín. 3 letras.</div>
                         <input type="email" class="dbl-input mb-1" id="correo" placeholder="Correo">
-                        <div class="error-text">Inválido.</div>
+                        <div class="dbl-error">Inválido.</div>
                         <button type="submit" class="dbl-btn-submit">Enviar</button>
-                        <div id="msjExito" style="display:none; color:#4ade80; font-weight:bold;">¡Enviado!</div>
+                        <div id="msjExito" style="display:none; color:#4ade80; font-weight:bold; font-size: 11px;">¡Enviado!</div>
                     </form>
                 </div>
             </div>
             
         </div>
 
-        <!-- BOTÓN DE MENÚ INFERIOR DERECHO -->
-        <div class="bottom-right-menu" id="btnHamburguesa">
-            <div class="menu-star"><i class="fas fa-bars"></i></div>
-            <span>MENÚ</span>
+        <!-- BOTÓN MENÚ (Estrella) -->
+        <div class="dbl-mainmenu" id="btnHamburguesa">
+            <div class="dbl-mainmenu__star">☰</div>
+            <span class="dbl-mainmenu__text">MENÚ</span>
         </div>
 
-        <!-- PANEL DE MENÚ HAMBURGUESA (Oculto por defecto, se abre con el botón MENÚ) -->
-        <nav class="dbl-nav-overlay" id="navMenu">
-            <div class="close-btn" id="closeMenu"><i class="fas fa-times"></i></div>
-            <div class="nav-content">
-                <h2>OPCIONES</h2>
-                <div class="dbl-nav-item nav-link-btn" data-target="pasatiempos">Pasatiempos</div>
-                <div class="dbl-nav-item nav-link-btn" data-target="horario">Horario</div>
-                <div class="dbl-nav-item nav-link-btn" data-target="favoritos">Favoritos</div>
-                <div class="dbl-nav-item nav-link-btn" data-target="contacto">Contacto</div>
+        <!-- NAVEGACIÓN OVERLAY -->
+        <nav class="dbl-nav" id="navMenu">
+            <div class="dbl-nav__close" id="closeMenu">✖</div>
+            <div class="dbl-nav__content">
+                <h2 class="dbl-nav__title">OPCIONES</h2>
+                <div class="dbl-nav__item nav-link-btn" data-target="pasatiempos">Pasatiempos</div>
+                <div class="dbl-nav__item nav-link-btn" data-target="horario">Horario</div>
+                <div class="dbl-nav__item nav-link-btn" data-target="favoritos">Favoritos</div>
+                <div class="dbl-nav__item nav-link-btn" data-target="contacto">Contacto</div>
             </div>
         </nav>
 
     </div>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
+    
+    <!-- Registro PWA -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                .then(reg => console.log('SW Registrado'))
+                .catch(err => console.error('Error SW', err));
+            });
+        }
+    </script>
 </body>
 </html>
