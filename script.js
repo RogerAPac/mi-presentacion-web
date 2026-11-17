@@ -1,54 +1,56 @@
 $(document).ready(function() {
-
     let paginaHidratada = false;
 
-    // ==========================================
-    // HIDRATACIÓN AL PRIMER CLIC (Y actualización visual)
-    // ==========================================
     function hidratarPagina() {
         if (paginaHidratada) return;
         paginaHidratada = true;
 
-        // Cambiamos los textos de las barras de estado
         $('#statusText').text('OFF').css('color', '#4ade80');
         $('#hydrateText').text('COMPLETADA').css('color', '#4ade80');
-        
-        // Actualizamos el diálogo
         $('#dialogTitle').text('Sistema Listo');
-        $('#dialogText').text('Interfaz hidratada correctamente. Ya puedes usar los botones laterales o el menú de la estrella.');
+        $('#dialogText').text('Interfaz hidratada correctamente. Ya puedes usar los botones laterales.');
 
-        // 1. Eventos de los botones laterales (Píldoras)
-        $('.menu-btn').off('click').on('click', function() {
+        // DELEGACIÓN DE EVENTOS (Anti Memory Leaks)
+        $('.dbl-sidemenu').off('click', '.dbl-sidemenu__item').on('click', '.dbl-sidemenu__item', function() {
             let target = $(this).data('target');
             cambiarSeccion(target);
         });
 
-        // 2. Eventos del menú inferior (Estrella)
         $('#btnHamburguesa').off('click').on('click', function() {
             $('#navMenu').addClass('show');
         });
 
-        // 3. Cerrar menú
-        $('#closeMenu, .dbl-nav-item').off('click').on('click', function(e) {
-            if ($(this).hasClass('dbl-nav-item')) {
+        $('.dbl-nav').off('click', '#closeMenu, .dbl-nav__item').on('click', '#closeMenu, .dbl-nav__item', function(e) {
+            if ($(this).hasClass('dbl-nav__item')) {
                 let target = $(this).data('target');
                 cambiarSeccion(target);
             }
             $('#navMenu').removeClass('show');
         });
 
-        // 4. Validaciones del formulario
+        // VALIDACIÓN Y SANITIZACIÓN CON DOMPURIFY
         $('#formulario').off('submit').on('submit', function(e) {
             e.preventDefault();
             let isValid = true;
 
             const nombre = $('#nombre');
-            if (!/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{3,}$/.test(nombre.val().trim())) { nombre.addClass('is-invalid'); isValid = false; }
-            else nombre.removeClass('is-invalid');
+            // DOMPurify limpiando el input (por si inyectan HTML)
+            const nombreLimpio = DOMPurify.sanitize(nombre.val().trim());
+            
+            if (!/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{3,}$/.test(nombreLimpio)) { 
+                nombre.addClass('is-invalid'); isValid = false; 
+            } else { 
+                nombre.removeClass('is-invalid'); 
+            }
 
             const correo = $('#correo');
-            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo.val())) { correo.addClass('is-invalid'); isValid = false; }
-            else correo.removeClass('is-invalid');
+            const correoLimpio = DOMPurify.sanitize(correo.val().trim());
+            
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correoLimpio)) { 
+                correo.addClass('is-invalid'); isValid = false; 
+            } else { 
+                correo.removeClass('is-invalid'); 
+            }
 
             if (isValid) {
                 $('#msjExito').fadeIn(200);
@@ -58,18 +60,15 @@ $(document).ready(function() {
         });
     }
 
-    // Función para cambiar la tarjeta visible
     function cambiarSeccion(target) {
-        $('.dbl-event-card').removeClass('active');
-        $('#' + target).addClass('active');
+        $('.dbl-card').removeClass('dbl-card--active');
+        $('#' + target).addClass('dbl-card--active');
     }
 
-    // Disparadores de hidratación (cualquier toque o clic)
+    // Disparadores
     $(document).one('click touchstart keydown', function() {
         hidratarPagina();
     });
     
-    // Auto-hidratación a los 2 segundos por si acaso
     setTimeout(hidratarPagina, 2000);
-
 });
